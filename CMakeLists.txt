@@ -4,4 +4,5 @@ project(Laboratorio_di_Programmazione)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(Laboratorio_di_Programmazione main.cpp
-        main.cpp)
+        main.cpp
+        Transazione.h)
