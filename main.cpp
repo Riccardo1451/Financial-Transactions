@@ -2,6 +2,7 @@
 #include "Transazione.h"
 #include "ContoCorrente.h"
 #include <fstream>
+#include <sstream>
 
 
 
@@ -20,8 +21,8 @@ int main() {
     c1.EseguiTransazione(t3);
     cout <<"Saldo dopo la terza transazione"<<c1.getSaldo()<<endl;
 
-    ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt",ios::app); //ios::app permentte di non sovrascrivere il file
-    fout << t1.getInfo();
+    /*ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //ios::app permentte di non sovrascrivere il file
+    fout << t3.getInfo();
     fout.close();
 
 
@@ -31,7 +32,30 @@ int main() {
         cout << c;
     }
 
+    fin.close();*/
+
+    ifstream fin("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //apertura del file
+    std::string input;
+   while( std::getline(fin,input)) {
+       //vado a prendere la linea e con il ciclo while posso prenderne una ad una ed inserirla nella variabile input
+
+       istringstream iss(input); //prendo input
+       int x;
+       std::string In;
+       std::string data;
+
+       if (iss >> x >> In >> data) {
+           // con l'operatore >> posso estrarre l'input (divisi da spazi) e salvarlo nelle variabili
+           std::cout << "Importo: " << x << std::endl;
+           std::cout << "In: " << In << std::endl;
+           std::cout << "Data: " << data << std::endl;
+
+       } else {
+           std::cerr << "Errore nella lettura dei dati." << std::endl;
+       }
+   }
     fin.close();
+
 
 
 }

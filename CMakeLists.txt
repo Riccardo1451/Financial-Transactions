@@ -8,4 +8,6 @@ add_executable(Laboratorio_di_Programmazione main.cpp
         Transazione.h
         Transazione.cpp
         ContoCorrente.cpp
-        ContoCorrente.h)
+        ContoCorrente.h
+        FileManager.cpp
+        FileManager.h)

@@ -30,12 +30,13 @@ void Transazione::setData(std::string data) {
 }
 
 std::string Transazione::getInfo() {
+    //Andiamo a creare una stringa per ogni transazione in modo che possiamo scriverla su un file
     std::string opt;
     if(In) {
         opt = "Entrata";
     }else opt="Uscita";
 
-    return std::to_string(Importo)+opt+data;
+    return std::to_string(Importo)+" "+opt+" "+data;
 }
 
 
