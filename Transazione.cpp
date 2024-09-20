@@ -4,23 +4,31 @@
 
 #include "Transazione.h"
 
-Transazione::Transazione(int Valore, bool in) {
-    setValore(Valore);
-    setIn(in);
-}
-void Transazione::setValore(int valore) {
-    Transazione::Valore = valore;
+Transazione::Transazione(int Importo, bool in, std::string& data) : Importo(Importo),In(in), data(data){ }
+
+void Transazione::setImporto(int valore) {
+    this->Importo = valore;
 }
 void Transazione::setIn(bool opzione) {
-    Transazione::In = opzione;
+    this->In = opzione;
 }
 
-
-int  Transazione::getValore() const{
-    return Valore;
+int  Transazione::getImporto() const{
+    return Importo;
 }
 
 bool Transazione::getIn() const{
     return In;
 }
+
+std::string Transazione::getData() const {
+    return data;
+}
+
+void Transazione::setData(std::string data) {
+    this->data = data;
+}
+
+
+
 

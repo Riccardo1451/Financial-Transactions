@@ -4,21 +4,27 @@
 
 #ifndef TRANSAZIONE_H
 #define TRANSAZIONE_H
+#include <string>
+
 //IDEA: classe che permette di operare sul conto corrente entrata e uscita
 
 class Transazione {
 
 public:
-    Transazione(int Valore, bool in);
+    Transazione(int Importo, bool in, std::string& data);
 
-    int getValore() const;
-    void setValore(int valore);
+    int getImporto() const;
+    void setImporto(int valore);
 
     bool getIn() const;
     void setIn(bool opzione);
 
+    std::string getData() const;
+    void setData(std::string data);
+
 private:
-    int Valore;
+    int Importo;
     bool In; //True se l'operazione è in entrata, False altrimenti
+    std::string data;
 };
 #endif //TRANSAZIONE_H
