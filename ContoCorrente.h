@@ -4,7 +4,9 @@
 
 #ifndef CONTOCORRENTE_H
 #define CONTOCORRENTE_H
+#include "Transazione.h"
 #include <string>
+#include <vector>
 
 
 class ContoCorrente {
@@ -12,10 +14,19 @@ class ContoCorrente {
 public:
     ContoCorrente(std::string Intestatario, int Saldo);
 
+    int getSaldo() const;
+    void setSaldo(int valore);
+
+    void EseguiTransazione(Transazione& Transazione);
+    //l'intestatario deve essere unico e non può variare una volta che il conto viene creato
+
+    std::vector<Transazione> getStoricoTransazioni();
 
 private:
     std::string Intestatario;
     int Saldo;
+
+    std::vector <Transazione> StoricoTransazioni;
 };
 
 
