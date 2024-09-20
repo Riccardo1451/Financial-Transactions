@@ -4,7 +4,7 @@
 
 #include "Transazione.h"
 
-Transazione::Transazione(int Importo, bool in, std::string& data) : Importo(Importo),In(in), data(data){ }
+Transazione::Transazione(int Importo, bool in, std::string data) : Importo(Importo),In(in), data(data){ }
 
 void Transazione::setImporto(int valore) {
     this->Importo = valore;
@@ -21,7 +21,7 @@ bool Transazione::getIn() const{
     return In;
 }
 
-std::string Transazione::getData() const {
+std::string Transazione::getData() {
     return data;
 }
 

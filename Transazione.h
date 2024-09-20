@@ -11,7 +11,7 @@
 class Transazione {
 
 public:
-    Transazione(int Importo, bool in, std::string& data);
+    Transazione(int Importo, bool in, std::string data);
 
     int getImporto() const;
     void setImporto(int valore);
@@ -19,8 +19,9 @@ public:
     bool getIn() const;
     void setIn(bool opzione);
 
-    std::string getData() const;
+    std::string getData();
     void setData(std::string data);
+
 
 private:
     int Importo;
