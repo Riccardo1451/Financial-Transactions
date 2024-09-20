@@ -22,6 +22,8 @@ public:
     std::string getData();
     void setData(std::string data);
 
+    std::string getInfo();
+
 
 private:
     int Importo;

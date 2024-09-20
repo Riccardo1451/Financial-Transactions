@@ -29,6 +29,14 @@ void Transazione::setData(std::string data) {
     this->data = data;
 }
 
+std::string Transazione::getInfo() {
+    std::string opt;
+    if(In) {
+        opt = "Entrata";
+    }else opt="Uscita";
+
+    return std::to_string(Importo)+opt+data;
+}
 
 
 
