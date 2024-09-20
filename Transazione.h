@@ -11,10 +11,14 @@ class Transazione {
 public:
     Transazione(int Valore, bool in);
 
-    int getValore();
-    bool getIn();
+    int getValore() const;
+    void setValore(int valore);
+
+    bool getIn() const;
+    void setIn(bool opzione);
+
 private:
     int Valore;
-    bool in; //True se l'operazione è in entrata, False altrimenti
+    bool In; //True se l'operazione è in entrata, False altrimenti
 };
 #endif //TRANSAZIONE_H
