@@ -3,7 +3,7 @@
 //
 
 #include "ContoCorrente.h"
-
+#include <fstream>
 #include <iostream>
 
 int ContoCorrente::getSaldo() const {
@@ -34,5 +34,10 @@ void ContoCorrente::EseguiTransazione(Transazione &Transazione) {
             return;
         }
     }
-    StoricoTransazioni.push_back(Transazione);
+    StoricoTransazioni.push_back(Transazione); //Dobbiamo andare a scrivere la transazione che è avvenuta sul file txt
+
+    std::ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt", std::ios::app); //ios::app permentte di non sovrascrivere il file
+    fout << Transazione.getInfo()+"\n";
+    fout.close();
+    //Vado a scrivere sul file estratto ogni operazione
 }
