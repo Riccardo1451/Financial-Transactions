@@ -17,7 +17,7 @@ void FileManager::ReadExtractFile(std::string pos, ContoCorrente &cc) {
     std::string input;
 
     while(std::getline(fin,input)) {
-        //prendo la seingola linea dal file aperto e la salvo come stringa su input
+        //prendo la singola linea dal file aperto e la salvo come stringa su input
 
         istringstream iss (input);
         int x;

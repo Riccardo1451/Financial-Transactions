@@ -26,7 +26,7 @@ private:
     std::string Intestatario;
     int Saldo;
 
-    std::vector <Transazione> StoricoTransazioni;
+    std::vector <Transazione> StoricoTransazioni; //TODO:si può anche rimuovere visto che il CC scrivere direttamente la transazione sul file
 };
 
 

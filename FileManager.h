@@ -13,7 +13,7 @@ class FileManager {
     //Classe per gestire lettura e scrittura
 public:
     void ReadExtractFile(std::string pos, ContoCorrente &cc ); //IDEA: legge le transazioni da eseguire da un file, le crea e le esegue
-    void WriteExtractFile();
+    void WriteExtractFile(); //TODO:implementare possibile far scrivere al FM le transazioni ?
 
 private:
 };
