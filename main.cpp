@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Transazione.h"
 #include "ContoCorrente.h"
+#include "FileManager.h"
 #include <fstream>
 #include <sstream>
 
@@ -10,7 +11,8 @@ using namespace std;
 
 int main() {
     ContoCorrente c1 = ContoCorrente("Riccardo",4000);
-    Transazione t1 = Transazione(500,true,"11-02-24");
+    FileManager fm = FileManager();
+    /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
     Transazione t3 = Transazione(200,false,"19-02-24");
 
@@ -19,7 +21,7 @@ int main() {
     c1.EseguiTransazione(t2);
     cout <<"Saldo dopo la seconda transazione"<<c1.getSaldo()<<endl;
     c1.EseguiTransazione(t3);
-    cout <<"Saldo dopo la terza transazione"<<c1.getSaldo()<<endl;
+    cout <<"Saldo dopo la terza transazione"<<c1.getSaldo()<<endl;*/
 
     /*ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //ios::app permentte di non sovrascrivere il file
     fout << t3.getInfo();
@@ -34,7 +36,7 @@ int main() {
 
     fin.close();*/
 
-    ifstream fin("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //apertura del file
+    /*ifstream fin("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //apertura del file
     std::string input;
    while( std::getline(fin,input)) {
        //vado a prendere la linea e con il ciclo while posso prenderne una ad una ed inserirla nella variabile input
@@ -54,7 +56,9 @@ int main() {
            std::cerr << "Errore nella lettura dei dati." << std::endl;
        }
    }
-    fin.close();
+    fin.close();*/
+
+    fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
 
 
 
