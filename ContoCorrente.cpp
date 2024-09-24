@@ -13,9 +13,6 @@ void ContoCorrente::setSaldo(int valore) {
     this->Saldo = valore;
 }
 
-std::vector<Transazione> ContoCorrente::getStoricoTransazioni() {
-    return StoricoTransazioni;
-}
 
 ContoCorrente::ContoCorrente(std::string Intestatario, int Saldo) : Intestatario(Intestatario), Saldo(Saldo){ }
 
@@ -34,8 +31,6 @@ void ContoCorrente::EseguiTransazione(Transazione &Transazione) {
             return;
         }
     }
-    StoricoTransazioni.push_back(Transazione); //Dobbiamo andare a scrivere la transazione che è avvenuta sul file txt
-
     std::ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt", std::ios::app); //ios::app permentte di non sovrascrivere il file
     fout << Transazione.getInfo()+"\n";
     fout.close();

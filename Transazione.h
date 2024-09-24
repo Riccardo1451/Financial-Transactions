@@ -29,5 +29,6 @@ private:
     int Importo;
     bool In; //True se l'operazione è in entrata, False altrimenti
     std::string data;
+    //TODO: Aggiungere attributo conciliato -> Controllano l'estratto conto (verificano)
 };
 #endif //TRANSAZIONE_H

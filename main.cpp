@@ -60,6 +60,7 @@ int main() {
 
     fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
 
+    //TODO:operazioni che modificano transazioni, cancellino transazioni e cerchino transazioni -> metodo per contare il N di transazioni
 
 
 }

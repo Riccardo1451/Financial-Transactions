@@ -20,13 +20,11 @@ public:
     void EseguiTransazione(Transazione& Transazione);
     //l'intestatario deve essere unico e non può variare una volta che il conto viene creato
 
-    std::vector<Transazione> getStoricoTransazioni();
 
 private:
     std::string Intestatario;
-    int Saldo;
+    int Saldo; //TODO: il saldo non si può impostare ma deriva dallo storico il conto può avere un importo di partenza da sommare poi al saldo delle transazioni
 
-    std::vector <Transazione> StoricoTransazioni; //TODO:si può anche rimuovere visto che il CC scrivere direttamente la transazione sul file
 };
 
 
