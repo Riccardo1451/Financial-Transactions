@@ -11,10 +11,10 @@
 class Transazione {
 
 public:
-    Transazione(int Saldo, bool in, std::string data);
+    Transazione(int Importo, bool in, std::string data, bool conciliata=false);
 
-    int getSaldo() const;
-    void setSaldo(int valore);
+    int getImporto() const;
+    void setImporto(int valore);
 
     bool getIn() const;
     void setIn(bool opzione);
@@ -24,11 +24,19 @@ public:
 
     std::string getInfo();
 
+    int getID() const;
+
 
 private:
-    int Saldo;
+    int Importo;
     bool In; //True se l'operazione è in entrata, False altrimenti
     std::string data;
-    //TODO: Aggiungere attributo conciliato -> Controllano l'estratto conto (verificano)
+
+    bool Conciliata; //TODO:implementare la verifica di conciliazione
+
+    int ID; //Attributo UNIVOCO che mi permette di identificare univocamente ogni transazione
+
+    static int UltimoID; //Mantiene traccia dell'utlimo usato
+
 };
 #endif //TRANSAZIONE_H

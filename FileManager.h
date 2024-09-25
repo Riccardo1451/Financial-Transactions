@@ -4,16 +4,15 @@
 
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
-#include <cstdio>
-#include <string>
-#include "ContoCorrente.h"
+
+#include "Transazione.h"
 
 
 class FileManager {
-    //Classe per gestire lettura e scrittura
+    //Classe per gestire lettura e scrittura da/su File txt
 public:
-    void ReadExtractFile(std::string pos, ContoCorrente &cc ); //IDEA: legge le transazioni da eseguire da un file, le crea e le esegue
-    void WriteExtractFile(); //TODO:implementare possibile far scrivere al FM le transazioni ?
+    void ScriviTransazioniSuFile(std::string nomeFile, std::vector<Transazione> &transazioni);
+    void CaricaTransazioniDaFile(std::string nomeFile, std::vector<Transazione> &transazioni);
 
 private:
 };

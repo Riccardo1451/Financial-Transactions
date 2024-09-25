@@ -5,34 +5,46 @@
 #include "ContoCorrente.h"
 #include <fstream>
 #include <iostream>
+using namespace std;
 
-int ContoCorrente::getImporto() const {
-    return Importo;
+int ContoCorrente::getBudget() const {
+    return Budget;
 }
-void ContoCorrente::setImporto(int valore) {
-    this->Importo = valore;
+void ContoCorrente::setBudget(int budget) {
+    this->Budget = budget;
+}
+
+std::string ContoCorrente::getNome() const {
+    return Intestatario;
 }
 
 
-ContoCorrente::ContoCorrente(std::string Intestatario, int Importo) : Intestatario(Intestatario), Importo(Importo){ }
+ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome), Budget(Budget){ }
 
-void ContoCorrente::EseguiTransazione(Transazione &Transazione) {
-    //gestione della transazione
-    if(Transazione.getIn()) { //il valore è un bool -> True se l'operazione è in entrata sul conto False altrimenti
-        Importo+=Transazione.getSaldo();
-    }
-    else if(!Transazione.getIn()){
-        if(Importo >= Transazione.getSaldo()){
-            //verifico che il saldo sia disponibile
-            Importo-=Transazione.getSaldo();
-        }else {
-            //Gestione di saldo non disponibile
-            std::cout <<"Il saldo è insufficiente per eseguire la transazione"<<std::endl;
+
+
+void ContoCorrente::addTransazione(Transazione &Transazione) {
+    //Viene passata una transazione da inserire nel file delle transazioni
+    Transazioni.push_back(Transazione);
+    fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
+    //Vado a scrivere sul file estratto ogni operazione
+}
+
+void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData) {
+    //Tramite ID posso prendere la transazioni relativa e modificarla
+    for(auto& transazione : Transazioni) {
+        if(transazione.getID() == ID) {
+            transazione.setImporto(nuovoImporto);
+            transazione.setIn(nuovoIn);
+            transazione.setData(nuovaData);
+            fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
             return;
         }
     }
-    std::ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt", std::ios::app); //ios::app permentte di non sovrascrivere il file
-    fout << Transazione.getInfo()+"\n";
-    fout.close();
-    //Vado a scrivere sul file estratto ogni operazione
+    cerr <<"Transaizone con ID: "<<ID<<" non trovata"<<endl;
 }
+
+
+
+
+

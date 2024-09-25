@@ -8,23 +8,31 @@
 #include <string>
 #include <vector>
 
+#include "FileManager.h"
+
 
 class ContoCorrente {
 
 public:
-    ContoCorrente(std::string Intestatario, int Importo);
+    ContoCorrente(std::string Nome, int budget);
 
-    int getImporto() const;
-    void setImporto(int valore);
+    int getBudget() const;
+    void setBudget(int valore);
 
-    void EseguiTransazione(Transazione& Transazione);
-    //l'intestatario deve essere unico e non può variare una volta che il conto viene creato
+    std::string getNome() const;
 
+    void addTransazione(Transazione &Transazione);
+
+    void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData);
+
+    void deleteTransazione(int ID);
 
 private:
     std::string Intestatario;
-    int Importo;
+    int Budget;
 
+    std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
+    FileManager fm;
 };
 
 

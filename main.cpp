@@ -11,7 +11,17 @@ using namespace std;
 
 int main() {
     ContoCorrente c1 = ContoCorrente("Riccardo",4000);
-    FileManager fm = FileManager();
+    Transazione t1 = Transazione(700, false, "12-03-2007");
+    Transazione t2 = Transazione(400, false, "10-09-2007");
+    Transazione t3 = Transazione(100, true, "16-05-2010");
+
+    c1.addTransazione(t1);
+    c1.addTransazione(t2);
+    c1.addTransazione(t3);
+
+    c1.modTransazione(2,300,false,"12-03-2000");
+
+    c1.modTransazione(3,1000,true,"14-01-2003");
 
     /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
@@ -59,7 +69,7 @@ int main() {
    }
     fin.close();*/
 
-    fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
+    //fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
 
     //TODO:operazioni che modificano transazioni, cancellino transazioni e cerchino transazioni -> metodo per contare il N di transazioni
 

@@ -4,17 +4,22 @@
 
 #include "Transazione.h"
 
-Transazione::Transazione(int Saldo, bool in, std::string data) : Saldo(Saldo),In(in), data(data){ }
+int Transazione::UltimoID = 0;
 
-void Transazione::setSaldo(int valore) {
-    this->Saldo = valore;
+Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata)
+: Importo(Importo),In(in), data(data), Conciliata(conciliata) {
+    ID = ++UltimoID; //Assegno l'ID univoco alla transazione e vado ad incrementare il valore dell'UltimoID
+}
+
+void Transazione::setImporto(int valore) {
+    this->Importo = valore;
 }
 void Transazione::setIn(bool opzione) {
     this->In = opzione;
 }
 
-int  Transazione::getSaldo() const{
-    return Saldo;
+int  Transazione::getImporto() const{
+    return Importo;
 }
 
 bool Transazione::getIn() const{
@@ -29,14 +34,16 @@ void Transazione::setData(std::string data) {
     this->data = data;
 }
 
+int Transazione::getID() const {
+    return ID;
+}
+
 std::string Transazione::getInfo() {
     //Andiamo a creare una stringa per ogni transazione in modo che possiamo scriverla su un file
-    std::string opt;
-    if(In) {
-        opt = "Entrata";
-    }else opt="Uscita";
+    std::string IO = In ? "Entrata" : "Uscita";
+    std::string Conc = Conciliata ? "Conciliata" : "Non Conciliata";
 
-    return std::to_string(Saldo)+" "+opt+" "+data;
+    return "ID: "+std::to_string(ID)+" "+std::to_string(Importo)+" "+IO+" "+data+" "+Conc;
 }
 
 
