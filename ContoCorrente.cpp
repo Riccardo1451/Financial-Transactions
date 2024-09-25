@@ -44,6 +44,21 @@ void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::
     cerr <<"Transaizone con ID: "<<ID<<" non trovata"<<endl;
 }
 
+void ContoCorrente::deleteTransazione(int ID) {
+    //Tramite ID vado a rimuovere la transazioni dal file e dal vettore
+    auto it = std::remove_if(Transazioni.begin(), Transazioni.end(), [ID](const Transazione& t) {
+       return t.getID() == ID; // Ritorna true se l'ID corrisponde
+   });
+
+    if (it != Transazioni.end()) {
+        Transazioni.erase(it, Transazioni.end()); // Rimuovi le transazioni trovate
+        fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
+    } else {
+        cerr << "Transazione con ID " << ID << " non trovata." << std::endl; // Messaggio di errore se non trovata
+    }
+}
+
+
 
 
 

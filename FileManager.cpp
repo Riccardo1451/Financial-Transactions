@@ -8,7 +8,7 @@
 using namespace std;
 
 void FileManager::CaricaTransazioniDaFile(std::string nomeFile, std::vector<Transazione> &transazioni) {
-
+    //TODO: da file esterno voglio prendere le transazioni e inserirle nel vettore per poi scriverle sul file
 }
 
 void FileManager::ScriviTransazioniSuFile(std::string nomeFile, vector<Transazione> &transazioni) {

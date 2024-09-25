@@ -23,6 +23,8 @@ int main() {
 
     c1.modTransazione(3,1000,true,"14-01-2003");
 
+    c1.deleteTransazione(1);
+
     /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
     Transazione t3 = Transazione(200,false,"19-02-24");
@@ -71,7 +73,7 @@ int main() {
 
     //fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
 
-    //TODO:operazioni che modificano transazioni, cancellino transazioni e cerchino transazioni -> metodo per contare il N di transazioni
+    //TODO: metodo per contare il N di transazioni
 
 
 }
