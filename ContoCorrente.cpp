@@ -6,25 +6,25 @@
 #include <fstream>
 #include <iostream>
 
-int ContoCorrente::getSaldo() const {
-    return Saldo;
+int ContoCorrente::getImporto() const {
+    return Importo;
 }
-void ContoCorrente::setSaldo(int valore) {
-    this->Saldo = valore;
+void ContoCorrente::setImporto(int valore) {
+    this->Importo = valore;
 }
 
 
-ContoCorrente::ContoCorrente(std::string Intestatario, int Saldo) : Intestatario(Intestatario), Saldo(Saldo){ }
+ContoCorrente::ContoCorrente(std::string Intestatario, int Importo) : Intestatario(Intestatario), Importo(Importo){ }
 
 void ContoCorrente::EseguiTransazione(Transazione &Transazione) {
     //gestione della transazione
     if(Transazione.getIn()) { //il valore è un bool -> True se l'operazione è in entrata sul conto False altrimenti
-        Saldo+=Transazione.getImporto();
+        Importo+=Transazione.getSaldo();
     }
     else if(!Transazione.getIn()){
-        if(Saldo >= Transazione.getImporto()){
+        if(Importo >= Transazione.getSaldo()){
             //verifico che il saldo sia disponibile
-            Saldo-=Transazione.getImporto();
+            Importo-=Transazione.getSaldo();
         }else {
             //Gestione di saldo non disponibile
             std::cout <<"Il saldo è insufficiente per eseguire la transazione"<<std::endl;

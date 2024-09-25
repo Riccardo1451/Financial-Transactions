@@ -12,10 +12,10 @@
 class ContoCorrente {
 
 public:
-    ContoCorrente(std::string Intestatario, int Saldo);
+    ContoCorrente(std::string Intestatario, int Importo);
 
-    int getSaldo() const;
-    void setSaldo(int valore);
+    int getImporto() const;
+    void setImporto(int valore);
 
     void EseguiTransazione(Transazione& Transazione);
     //l'intestatario deve essere unico e non può variare una volta che il conto viene creato
@@ -23,7 +23,7 @@ public:
 
 private:
     std::string Intestatario;
-    int Saldo; //TODO: il saldo non si può impostare ma deriva dallo storico il conto può avere un importo di partenza da sommare poi al saldo delle transazioni
+    int Importo;
 
 };
 

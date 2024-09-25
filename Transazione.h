@@ -11,10 +11,10 @@
 class Transazione {
 
 public:
-    Transazione(int Importo, bool in, std::string data);
+    Transazione(int Saldo, bool in, std::string data);
 
-    int getImporto() const;
-    void setImporto(int valore);
+    int getSaldo() const;
+    void setSaldo(int valore);
 
     bool getIn() const;
     void setIn(bool opzione);
@@ -26,7 +26,7 @@ public:
 
 
 private:
-    int Importo;
+    int Saldo;
     bool In; //True se l'operazione è in entrata, False altrimenti
     std::string data;
     //TODO: Aggiungere attributo conciliato -> Controllano l'estratto conto (verificano)

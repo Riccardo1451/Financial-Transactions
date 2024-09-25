@@ -4,17 +4,17 @@
 
 #include "Transazione.h"
 
-Transazione::Transazione(int Importo, bool in, std::string data) : Importo(Importo),In(in), data(data){ }
+Transazione::Transazione(int Saldo, bool in, std::string data) : Saldo(Saldo),In(in), data(data){ }
 
-void Transazione::setImporto(int valore) {
-    this->Importo = valore;
+void Transazione::setSaldo(int valore) {
+    this->Saldo = valore;
 }
 void Transazione::setIn(bool opzione) {
     this->In = opzione;
 }
 
-int  Transazione::getImporto() const{
-    return Importo;
+int  Transazione::getSaldo() const{
+    return Saldo;
 }
 
 bool Transazione::getIn() const{
@@ -36,7 +36,7 @@ std::string Transazione::getInfo() {
         opt = "Entrata";
     }else opt="Uscita";
 
-    return std::to_string(Importo)+" "+opt+" "+data;
+    return std::to_string(Saldo)+" "+opt+" "+data;
 }
 
 

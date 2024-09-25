@@ -12,6 +12,7 @@ using namespace std;
 int main() {
     ContoCorrente c1 = ContoCorrente("Riccardo",4000);
     FileManager fm = FileManager();
+
     /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
     Transazione t3 = Transazione(200,false,"19-02-24");
