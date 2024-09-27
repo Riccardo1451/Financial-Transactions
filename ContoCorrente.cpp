@@ -58,6 +58,9 @@ void ContoCorrente::deleteTransazione(int ID) {
     }
 }
 
+void ContoCorrente::uploadTransazioni(std::string nomeFile, ContoCorrente& CC) {
+    fm.CaricaTransazioniDaFile(nomeFile,CC);
+}
 
 
 

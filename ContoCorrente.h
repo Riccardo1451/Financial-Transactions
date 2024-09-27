@@ -27,6 +27,8 @@ public:
 
     void deleteTransazione(int ID);
 
+    void uploadTransazioni(std::string nomeFile, ContoCorrente& CC);
+
 private:
     std::string Intestatario;
     int Budget;
