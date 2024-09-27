@@ -29,6 +29,9 @@ public:
 
     void uploadTransazioni(std::string nomeFile);
 
+    void checkTransazione(Transazione &transazione,std::string estrattoConto);
+    void checkAllTransaizoni(std::string estrattoConto);
+
 private:
     std::string Intestatario;
     int Budget;

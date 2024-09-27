@@ -2,6 +2,7 @@
 #include "FileManager.h"
 #include "Transazione.h"
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -56,4 +57,37 @@ void FileManager::ScriviTransazioniSuFile(std::string nomeFile, vector<Transazio
 
     fout.close(); // Chiudi il file
 }
+void FileManager::ConciliaTransazione(Transazione &transazione, std::string estrattoConto, std::vector<Transazione> &transazioni) {
+    ifstream fin(estrattoConto);
+    std::string input;
+
+    while(getline(fin,input)) {
+        if(transazione.getInfo()==input) {
+            for (auto &trans : transazioni) {
+                if (trans.getID() == transazione.getID()) {
+                    trans.setConciliata(true); // Modifica direttamente l'elemento nel vettore
+                    ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt", transazioni);
+                    return;
+                }
+            }
+        }
+    }
+    cerr<<"La transazione "<<transazione.getID()<<" non è ancora conciliata"<<endl;
+}
+
+void FileManager::ConciliaAllTransazioni(std::string estrattoConto, std::vector<Transazione> &transazioni) {
+    ifstream fin(estrattoConto);
+    std::string input;
+
+    while(getline(fin,input)) {
+        for(auto& transazione:transazioni) {
+            if(input == transazione.getInfo()) {
+                transazione.setConciliata(true);
+
+            }
+        }
+    }
+    ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",transazioni);
+}
+
 

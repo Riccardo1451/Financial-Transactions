@@ -62,6 +62,15 @@ void ContoCorrente::uploadTransazioni(std::string nomeFile) {
     fm.CaricaTransazioniDaFile(nomeFile,Transazioni);
 }
 
+void ContoCorrente::checkTransazione(Transazione &transazione, std::string estrattoConto) {
+    fm.ConciliaTransazione(transazione,estrattoConto,Transazioni);
+}
+void ContoCorrente::checkAllTransaizoni(std::string estrattoConto) {
+    fm.ConciliaAllTransazioni(estrattoConto,Transazioni);
+}
+
+
+
 
 
 

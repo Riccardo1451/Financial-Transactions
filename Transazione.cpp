@@ -38,6 +38,15 @@ int Transazione::getID() const {
     return ID;
 }
 
+bool Transazione::getConciliata() {
+    return Conciliata;
+}
+
+void Transazione::setConciliata(bool opt) {
+    Conciliata=opt;
+}
+
+
 std::string Transazione::getInfo() {
     //Andiamo a creare una stringa per ogni transazione in modo che possiamo scriverla su un file
     std::string IO = In ? "Entrata" : "Uscita";
@@ -45,6 +54,7 @@ std::string Transazione::getInfo() {
 
     return "ID: "+std::to_string(ID)+" "+std::to_string(Importo)+" "+IO+" "+data+" "+Conc;
 }
+
 
 
 

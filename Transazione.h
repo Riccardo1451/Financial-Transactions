@@ -19,6 +19,9 @@ public:
     bool getIn() const;
     void setIn(bool opzione);
 
+    bool getConciliata();
+    void setConciliata(bool opt);
+
     std::string getData();
     void setData(std::string data);
 
@@ -32,7 +35,7 @@ private:
     bool In; //True se l'operazione è in entrata, False altrimenti
     std::string data;
 
-    bool Conciliata; //TODO:implementare la verifica di conciliazione
+    bool Conciliata;
 
     int ID; //Attributo UNIVOCO che mi permette di identificare univocamente ogni transazione
 

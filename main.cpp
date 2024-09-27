@@ -39,6 +39,9 @@ int main() {
 
     c1.addTransazione(t5);
 
+    //c1.checkAllTransaizoni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
+    c1.checkTransazione(t4,"/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
+
     /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
     Transazione t3 = Transazione(200,false,"19-02-24");
