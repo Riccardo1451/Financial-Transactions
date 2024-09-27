@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void FileManager::CaricaTransazioniDaFile(std::string nomeFile, ContoCorrente& CC) {
+void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazione> &transazioni) {
 
     // il file deve essere scritto secondo il formato ID: int int stringa stringa stringa
 
@@ -34,7 +34,8 @@ void FileManager::CaricaTransazioniDaFile(std::string nomeFile, ContoCorrente& C
 
         Transazione temp = Transazione(importo,opt,data,conc);
 
-        CC.addTransazione(temp);
+        transazioni.push_back(temp);
+        ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",transazioni);
 
     }
 }

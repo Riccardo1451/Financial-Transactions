@@ -16,7 +16,7 @@ class FileManager {
     //Classe per gestire lettura e scrittura da/su File txt
 public:
     void ScriviTransazioniSuFile(std::string nomeFile, std::vector<Transazione> &transazioni);
-    void CaricaTransazioniDaFile(std::string nomeFile, ContoCorrente& CC); //TODO: è ridondante forse meglio farlo metodo dell contocorrente ma così è leggermente più pulito
+    void CaricaTransazioniDaFile(std::string nomeFile, std::vector<Transazione> &transazioni);
 
 private:
 };

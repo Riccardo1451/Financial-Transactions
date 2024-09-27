@@ -14,7 +14,7 @@ int main() {
     Transazione t1 = Transazione(700, false, "12-03-2007");
     Transazione t2 = Transazione(400, false, "10-09-2007");
     Transazione t3 = Transazione(100, true, "16-05-2010");
-    Transazione t4 = Transazione(20, false, "16-07-2030");
+
 
     c1.addTransazione(t1);
     c1.addTransazione(t2);
@@ -26,9 +26,18 @@ int main() {
 
     c1.deleteTransazione(1);
 
+    Transazione t4 = Transazione(20, false, "16-07-2030");
+
+
     c1.addTransazione(t4);
 
-    c1.uploadTransazioni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/ListaTransazioni.txt",c1);
+    c1.uploadTransazioni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/ListaTransazioni.txt");
+
+    c1.deleteTransazione(6);
+
+    Transazione t5 = Transazione(5,false,"15-02-1994");
+
+    c1.addTransazione(t5);
 
     /*Transazione t1 = Transazione(500,true,"11-02-24");
     Transazione t2 = Transazione(600,true,"16-02-24");
