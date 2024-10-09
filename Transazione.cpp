@@ -3,6 +3,8 @@
 //
 
 #include "Transazione.h"
+#include <iostream>
+using namespace std;
 
 int Transazione::UltimoID = 0;
 
@@ -12,7 +14,9 @@ Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata
 }
 
 void Transazione::setImporto(int valore) {
-    this->Importo = valore;
+    if (valore >= 0)
+        this->Importo = valore;
+    else cerr<<"L'importo non può essere negativo"<<endl;
 }
 void Transazione::setIn(bool opzione) {
     this->In = opzione;

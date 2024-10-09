@@ -21,6 +21,7 @@ set(SOURCE_FILES
 # Aggiungi i file sorgenti dei test.
 set(TEST_FILES
         test/test_Transazione.cpp
+        test/test_ContoCorrente.cpp
 )
 
 # Crea l'eseguibile del progetto principale.
