@@ -17,10 +17,10 @@ ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome) 
 
 
 
-void ContoCorrente::addTransazione(Transazione &Transazione) {
+void ContoCorrente::addTransazione(Transazione &Transazione, std::string Percorso) {
     //Viene passata una transazione da inserire nel file delle transazioni
     Transazioni.push_back(Transazione);
-    fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
+    fm.ScriviTransazioniSuFile(Percorso,Transazioni);
     //Vado a scrivere sul file estratto ogni operazione
 }
 

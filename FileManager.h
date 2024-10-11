@@ -19,7 +19,6 @@ public:
     void CaricaTransazioniDaFile(std::string nomeFile, std::vector<Transazione> &transazioni);
     void ConciliaTransazione(Transazione &transazione, std::string estrattoConto, std::vector<Transazione> &transazioni);
     void ConciliaAllTransazioni(std::string estrattoConto, std::vector<Transazione> &transazioni);
-private:
 };
 
 

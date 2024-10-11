@@ -31,7 +31,7 @@ void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazio
         //creo la transazione e la inserisco nel vettore
 
         bool opt = in == "Entrata" ? true:false;
-        bool conc = conciliata == "Conciliata" ? true:false;
+        bool conc = conciliata == " Conciliata" ? true:false;
 
         Transazione temp = Transazione(importo,opt,data,conc);
 
@@ -73,6 +73,7 @@ void FileManager::ConciliaTransazione(Transazione &transazione, std::string estr
         }
     }
     cerr<<"La transazione "<<transazione.getID()<<" non è ancora conciliata"<<endl;
+
 }
 
 void FileManager::ConciliaAllTransazioni(std::string estrattoConto, std::vector<Transazione> &transazioni) {

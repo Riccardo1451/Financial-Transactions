@@ -10,15 +10,20 @@
 using namespace std;
 
 int main() {
+
+    std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt";
+    std::string Estratto = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt";
+    std::string ListaUpload = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/ListaTransazioni.txt";
+
     ContoCorrente c1 = ContoCorrente("Riccardo");
     Transazione t1 = Transazione(700, false, "12-03-2007");
     Transazione t2 = Transazione(400, false, "10-09-2007");
     Transazione t3 = Transazione(100, true, "16-05-2010");
 
 
-    c1.addTransazione(t1);
-    c1.addTransazione(t2);
-    c1.addTransazione(t3);
+    c1.addTransazione(t1, ListaTransazioni);
+    c1.addTransazione(t2, ListaTransazioni);
+    c1.addTransazione(t3, ListaTransazioni);
 
     c1.modTransazione(2,300,false,"12-03-2000");
 
@@ -29,18 +34,18 @@ int main() {
     Transazione t4 = Transazione(20, false, "16-07-2030");
 
 
-    c1.addTransazione(t4);
+    c1.addTransazione(t4, ListaTransazioni);
 
-    c1.uploadTransazioni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/ListaTransazioni.txt");
+    c1.uploadTransazioni(ListaUpload);
 
     c1.deleteTransazione(6);
 
     Transazione t5 = Transazione(5,false,"15-02-1994");
 
-    c1.addTransazione(t5);
+    c1.addTransazione(t5, ListaTransazioni);
 
     //c1.checkAllTransaizoni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
-    c1.checkTransazione(t4,"/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
+    c1.checkTransazione(t4,Estratto);
 
 
     /*Transazione t1 = Transazione(500,true,"11-02-24");

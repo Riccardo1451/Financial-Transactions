@@ -22,6 +22,7 @@ set(SOURCE_FILES
 set(TEST_FILES
         test/test_Transazione.cpp
         test/test_ContoCorrente.cpp
+        test/test_FileManager.cpp
 )
 
 # Crea l'eseguibile del progetto principale.

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../Transazione.h"
 #include "../ContoCorrente.h"
+std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt";
 
 TEST(ContoCorrenteTest, TestValoriIniziali) {
     ContoCorrente c1("Mario Rossi");
@@ -12,7 +13,7 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     ContoCorrente c1 ("Mario Rossi");
     Transazione t1 (200, true, "12-01-2003");
     Transazione t2(300, false, "13-01-2003");
-    c1.addTransazione(t1);
+    c1.addTransazione(t1, ListaTransazioni);
 
 
     //Test su aggiunta Transazione al CC
@@ -26,7 +27,7 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     EXPECT_FALSE(c1.Transazioni.back().getIn());
     EXPECT_EQ(c1.Transazioni.back().getData(), "16-05-2000");
 
-    c1.addTransazione(t2);
+    c1.addTransazione(t2, ListaTransazioni);
 
     //Controllo in numero di Transazioni
     ASSERT_EQ(c1.Transazioni.size(),2);
@@ -42,7 +43,7 @@ TEST(ContoCorrenteTest, TransazioniInesistenti) {
 
     ContoCorrente c1("Mario Rossi", 5000);
     Transazione t1(200, true, "12-01-2003");
-    c1.addTransazione(t1);
+    c1.addTransazione(t1, ListaTransazioni);
 
     // Tenta di modificare una transazione con ID inesistente
     c1.modTransazione(999, 500, false, "15-01-2003");

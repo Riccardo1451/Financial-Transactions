@@ -18,7 +18,7 @@ public:
 
     std::string getNome() const;
 
-    void addTransazione(Transazione &Transazione);
+    void addTransazione(Transazione &Transazione, std::string Percorso);
 
     void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData);
 
@@ -38,8 +38,11 @@ private:
     std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
     FileManager fm;
 
+
     friend class ContoCorrenteTest_TestOPTransazioni_Test;
     friend class ContoCorrenteTest_TransazioniInesistenti_Test;
+    friend class FileManagerTest_TestGestioneFile_Test;
+    friend class FileManagerTest_TestConciliazione_Test;
 ;
 };
 

@@ -40,6 +40,7 @@ private:
     int ID; //Attributo UNIVOCO che mi permette di identificare univocamente ogni transazione
 
     static int UltimoID; //Mantiene traccia dell'utlimo usato
+    friend class FileManagerTest_TestGestioneFile_Test;
 
 };
 #endif //TRANSAZIONE_H
