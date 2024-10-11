@@ -10,7 +10,7 @@
 using namespace std;
 
 int main() {
-    ContoCorrente c1 = ContoCorrente("Riccardo",4000);
+    ContoCorrente c1 = ContoCorrente("Riccardo");
     Transazione t1 = Transazione(700, false, "12-03-2007");
     Transazione t2 = Transazione(400, false, "10-09-2007");
     Transazione t3 = Transazione(100, true, "16-05-2010");

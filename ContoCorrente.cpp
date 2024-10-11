@@ -7,19 +7,13 @@
 #include <iostream>
 using namespace std;
 
-int ContoCorrente::getBudget() const {
-    return Budget;
-}
-void ContoCorrente::setBudget(int budget) {
-    this->Budget = budget;
-}
 
 std::string ContoCorrente::getNome() const {
     return Intestatario;
 }
 
 
-ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome), Budget(Budget){ }
+ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome) {}
 
 
 

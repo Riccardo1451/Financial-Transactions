@@ -14,10 +14,7 @@
 class ContoCorrente {
 
 public:
-    ContoCorrente(std::string Nome, int budget);
-
-    int getBudget() const;
-    void setBudget(int valore);
+    ContoCorrente(std::string Nome, int Budget = 0);
 
     std::string getNome() const;
 
@@ -40,6 +37,10 @@ private:
 
     std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
     FileManager fm;
+
+    friend class ContoCorrenteTest_TestOPTransazioni_Test;
+    friend class ContoCorrenteTest_TransazioniInesistenti_Test;
+;
 };
 
 
