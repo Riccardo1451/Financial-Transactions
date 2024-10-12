@@ -125,12 +125,42 @@ CMakeFiles/run_tests.dir/test/test_Transazione.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/test/test_Transazione.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_Transazione.cpp" -o CMakeFiles/run_tests.dir/test/test_Transazione.cpp.s
 
+CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o: /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/test_ContoCorrente.cpp
+CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o -MF CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o.d -o CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o -c "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_ContoCorrente.cpp"
+
+CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_ContoCorrente.cpp" > CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.i
+
+CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_ContoCorrente.cpp" -o CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.s
+
+CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o: CMakeFiles/run_tests.dir/flags.make
+CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o: /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/test_FileManager.cpp
+CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o: CMakeFiles/run_tests.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o -MF CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o.d -o CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o -c "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_FileManager.cpp"
+
+CMakeFiles/run_tests.dir/test/test_FileManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/run_tests.dir/test/test_FileManager.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_FileManager.cpp" > CMakeFiles/run_tests.dir/test/test_FileManager.cpp.i
+
+CMakeFiles/run_tests.dir/test/test_FileManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/run_tests.dir/test/test_FileManager.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/test_FileManager.cpp" -o CMakeFiles/run_tests.dir/test/test_FileManager.cpp.s
+
 # Object files for target run_tests
 run_tests_OBJECTS = \
 "CMakeFiles/run_tests.dir/Transazione.cpp.o" \
 "CMakeFiles/run_tests.dir/ContoCorrente.cpp.o" \
 "CMakeFiles/run_tests.dir/FileManager.cpp.o" \
-"CMakeFiles/run_tests.dir/test/test_Transazione.cpp.o"
+"CMakeFiles/run_tests.dir/test/test_Transazione.cpp.o" \
+"CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o" \
+"CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o"
 
 # External object files for target run_tests
 run_tests_EXTERNAL_OBJECTS =
@@ -139,12 +169,15 @@ run_tests: CMakeFiles/run_tests.dir/Transazione.cpp.o
 run_tests: CMakeFiles/run_tests.dir/ContoCorrente.cpp.o
 run_tests: CMakeFiles/run_tests.dir/FileManager.cpp.o
 run_tests: CMakeFiles/run_tests.dir/test/test_Transazione.cpp.o
+run_tests: CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o
+run_tests: CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o
 run_tests: CMakeFiles/run_tests.dir/build.make
 run_tests: lib/libgtest.a
+run_tests: lib/libgmock.a
 run_tests: lib/libgtest_main.a
 run_tests: lib/libgtest.a
 run_tests: CMakeFiles/run_tests.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable run_tests"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable run_tests"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run_tests.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

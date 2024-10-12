@@ -354,6 +354,54 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MainExecutable.dir/build.make CMakeFiles/MainExecutable.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test/test_ContoCorrente.o: test/test_ContoCorrente.cpp.o
+.PHONY : test/test_ContoCorrente.o
+
+# target to build an object file
+test/test_ContoCorrente.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.o
+.PHONY : test/test_ContoCorrente.cpp.o
+
+test/test_ContoCorrente.i: test/test_ContoCorrente.cpp.i
+.PHONY : test/test_ContoCorrente.i
+
+# target to preprocess a source file
+test/test_ContoCorrente.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.i
+.PHONY : test/test_ContoCorrente.cpp.i
+
+test/test_ContoCorrente.s: test/test_ContoCorrente.cpp.s
+.PHONY : test/test_ContoCorrente.s
+
+# target to generate assembly for a file
+test/test_ContoCorrente.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_ContoCorrente.cpp.s
+.PHONY : test/test_ContoCorrente.cpp.s
+
+test/test_FileManager.o: test/test_FileManager.cpp.o
+.PHONY : test/test_FileManager.o
+
+# target to build an object file
+test/test_FileManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_FileManager.cpp.o
+.PHONY : test/test_FileManager.cpp.o
+
+test/test_FileManager.i: test/test_FileManager.cpp.i
+.PHONY : test/test_FileManager.i
+
+# target to preprocess a source file
+test/test_FileManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_FileManager.cpp.i
+.PHONY : test/test_FileManager.cpp.i
+
+test/test_FileManager.s: test/test_FileManager.cpp.s
+.PHONY : test/test_FileManager.s
+
+# target to generate assembly for a file
+test/test_FileManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/run_tests.dir/build.make CMakeFiles/run_tests.dir/test/test_FileManager.cpp.s
+.PHONY : test/test_FileManager.cpp.s
+
 test/test_Transazione.o: test/test_Transazione.cpp.o
 .PHONY : test/test_Transazione.o
 
@@ -409,6 +457,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test/test_ContoCorrente.o"
+	@echo "... test/test_ContoCorrente.i"
+	@echo "... test/test_ContoCorrente.s"
+	@echo "... test/test_FileManager.o"
+	@echo "... test/test_FileManager.i"
+	@echo "... test/test_FileManager.s"
 	@echo "... test/test_Transazione.o"
 	@echo "... test/test_Transazione.i"
 	@echo "... test/test_Transazione.s"
