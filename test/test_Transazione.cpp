@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+
+#include "../ContoCorrente.h"
 #include "../Transazione.h"
 
 
@@ -43,13 +45,16 @@ TEST(TransazioneTest, TestSetter) {
     EXPECT_TRUE(transazione.getConciliata());
 
     //Test metodo getInfo
-    EXPECT_EQ(transazione.getInfo(), "ID: "+ std::to_string(transazione.getID())+" "+"100"+" "+"Uscita"+" "+"2002-07-13"+" "+"Conciliata");
+    EXPECT_EQ(transazione.getInfo(),"ID: "+std::to_string(transazione.getID())+" "+std::to_string(100)+" "+"Uscita"+" "+"2002-07-13"+" "+"Conciliata");
 
 }
 
 TEST(TransazioneTestIncrementalID, TestID) {
     Transazione transizione1(100, true, "2023-09-27");
     Transazione transizione2(200, false, "2023-09-28");
+    ContoCorrente c1 ("Mario Rossi");
+    c1.addTransazione(transizione1,"");
+    c1.addTransazione(transizione2,"");
 
     //Test su due transaizone consecutive
     //Verifica ID consecutivi

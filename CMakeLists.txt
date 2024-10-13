@@ -39,10 +39,15 @@ add_executable(run_tests
         ${TEST_FILES})
 
 # Collega le librerie di GoogleTest solo all'eseguibile dei test.
-target_link_libraries(run_tests gtest gtest_main)
+target_link_libraries(run_tests gtest gmock gtest_main)
 
 # Abilita la possibilità di eseguire i test con CMake.
 enable_testing()
 
 # Aggiungi il test utilizzando l'eseguibile 'run_tests'.
 add_test(NAME run_tests COMMAND run_tests)
+
+include_directories(/Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/googletest/googlemock/include)
+include_directories(/Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/googletest/googletest/include)
+
+

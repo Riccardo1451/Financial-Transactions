@@ -13,12 +13,13 @@ std::string ContoCorrente::getNome() const {
 }
 
 
-ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome) {}
+ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome),IDcontatore(1) {}
 
 
 
 void ContoCorrente::addTransazione(Transazione &Transazione, std::string Percorso) {
     //Viene passata una transazione da inserire nel file delle transazioni
+    Transazione.setID(++IDcontatore);
     Transazioni.push_back(Transazione);
     fm.ScriviTransazioniSuFile(Percorso,Transazioni);
     //Vado a scrivere sul file estratto ogni operazione
@@ -53,7 +54,7 @@ void ContoCorrente::deleteTransazione(int ID) {
 }
 
 void ContoCorrente::uploadTransazioni(std::string nomeFile) {
-    fm.CaricaTransazioniDaFile(nomeFile,Transazioni);
+    fm.CaricaTransazioniDaFile(nomeFile,Transazioni,*this);
 }
 
 void ContoCorrente::checkTransazione(Transazione &transazione, std::string estrattoConto) {

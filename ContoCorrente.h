@@ -35,6 +35,8 @@ private:
     std::string Intestatario;
     int Budget;
 
+    int IDcontatore;
+
     std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
     FileManager fm;
 

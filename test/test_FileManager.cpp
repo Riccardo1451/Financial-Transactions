@@ -7,7 +7,6 @@
 
 
 TEST(FileManagerTest, TestGestioneFile) {
-    Transazione::UltimoID == 0;
     std::string PercorsoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/ListaTest.txt";
     ContoCorrente c1("Mario Rossi");
     Transazione t1 (200,true,"15-07-2004");

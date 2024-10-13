@@ -28,6 +28,7 @@ public:
     std::string getInfo();
 
     int getID() const;
+    void setID(int value);
 
 
 private:
@@ -39,7 +40,6 @@ private:
 
     int ID; //Attributo UNIVOCO che mi permette di identificare univocamente ogni transazione
 
-    static int UltimoID; //Mantiene traccia dell'utlimo usato
     friend class FileManagerTest_TestGestioneFile_Test;
 
 };

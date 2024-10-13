@@ -4,14 +4,13 @@
 
 #include "Transazione.h"
 #include <iostream>
+
+#include "googletest/googlemock/include/gmock/gmock-matchers.h"
 using namespace std;
 
-int Transazione::UltimoID = 0;
 
 Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata)
-: Importo(Importo),In(in), data(data), Conciliata(conciliata) {
-    ID = ++UltimoID; //Assegno l'ID univoco alla transazione e vado ad incrementare il valore dell'UltimoID
-}
+: Importo(Importo),In(in), data(data), Conciliata(conciliata),ID(0){ }
 
 void Transazione::setImporto(int valore) {
     if (valore >= 0)
@@ -42,6 +41,11 @@ int Transazione::getID() const {
     return ID;
 }
 
+void Transazione::setID(int value) {
+    ID = value;
+}
+
+
 bool Transazione::getConciliata() {
     return Conciliata;
 }
@@ -56,7 +60,7 @@ std::string Transazione::getInfo() {
     std::string IO = In ? "Entrata" : "Uscita";
     std::string Conc = Conciliata ? "Conciliata" : "Non Conciliata";
 
-    return "ID: "+std::to_string(ID)+" "+std::to_string(Importo)+" "+IO+" "+data+" "+Conc;
+    return "ID: "+std::to_string(ID)+" "+ std::to_string(Importo)+" "+IO+" "+data+" "+Conc;
 }
 
 
