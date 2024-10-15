@@ -7,6 +7,7 @@
 #include <iostream>
 using namespace std;
 
+std::string VisualizzaTransaizoni ="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
 
 std::string ContoCorrente::getNome() const {
     return Intestatario;
@@ -19,7 +20,7 @@ ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome),
 
 void ContoCorrente::addTransazione(Transazione &Transazione, std::string Percorso) {
     //Viene passata una transazione da inserire nel file delle transazioni
-    Transazione.setID(++IDcontatore);
+    Transazione.setID(IDcontatore++);
     Transazioni.push_back(Transazione);
     fm.ScriviTransazioniSuFile(Percorso,Transazioni);
     //Vado a scrivere sul file estratto ogni operazione
@@ -32,7 +33,7 @@ void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::
             transazione.setImporto(nuovoImporto);
             transazione.setIn(nuovoIn);
             transazione.setData(nuovaData);
-            fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
+            fm.ScriviTransazioniSuFile(VisualizzaTransaizoni,Transazioni);
             return;
         }
     }
@@ -47,7 +48,7 @@ void ContoCorrente::deleteTransazione(int ID) {
 
     if (it != Transazioni.end()) {
         Transazioni.erase(it, Transazioni.end()); // Rimuovi le transazioni trovate
-        fm.ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",Transazioni);
+        fm.ScriviTransazioniSuFile(VisualizzaTransaizoni,Transazioni);
     } else {
         cerr << "Transazione con ID " << ID << " non trovata." << std::endl; // Messaggio di errore se non trovata
     }

@@ -8,6 +8,7 @@
 
 
 using namespace std;
+std::string VisualizzaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
 
 void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazione> &transazioni, ContoCorrente& cc) {
 
@@ -35,7 +36,7 @@ void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazio
 
         Transazione temp = Transazione(importo,opt,data,conc);
         cc.addTransazione(temp,"");
-        ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",transazioni);
+        ScriviTransazioniSuFile(VisualizzaTransazioni,transazioni);
 
     }
 }
@@ -81,14 +82,14 @@ void FileManager::ConciliaTransazione(Transazione &transazione, std::string estr
                     trans.getData() == data) {
                     transazione.setConciliata(true);
                     trans.setConciliata(true);
-                    ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt", transazioni);
+                    ScriviTransazioniSuFile(VisualizzaTransazioni, transazioni);
                     return;
                     }
             }
             }
     }
 
-    cerr << "La transazione non è ancora conciliata" << endl;
+    cerr << "La transazione ID: "+std::to_string(transazione.getID())+" non è ancora conciliata" << endl;
 }
 
 
@@ -115,7 +116,7 @@ void FileManager::ConciliaAllTransazioni(std::string estrattoConto, std::vector<
         }
     }
 
-    ScriviTransazioniSuFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt", transazioni);
+    ScriviTransazioniSuFile(VisualizzaTransazioni, transazioni);
 }
 
 

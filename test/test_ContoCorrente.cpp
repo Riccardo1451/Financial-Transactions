@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../Transazione.h"
 #include "../ContoCorrente.h"
-std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt";
+std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
 
 TEST(ContoCorrenteTest, TestValoriIniziali) {
     ContoCorrente c1("Mario Rossi");

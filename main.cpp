@@ -1,41 +1,48 @@
 #include <iostream>
 #include "Transazione.h"
 #include "ContoCorrente.h"
-#include "FileManager.h"
 #include <fstream>
-#include <sstream>
 
+//Non serve includere il File Manager, viene usato implicitamente dal conto corrente
 
 
 using namespace std;
 
 int main() {
+    //Indirizzi dei file.txt
+    std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
+    std::string Estratto = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/Estratto.txt";
+    std::string ListaUpload = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/ListaTransazioni.txt";
 
-    std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt";
-    std::string Estratto = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt";
-    std::string ListaUpload = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/ListaTransazioni.txt";
-
+    //Creazione di un conto corrente
     ContoCorrente c1 = ContoCorrente("Riccardo");
+
+    //Creazione transazioni, non hanno ancora un ID associato
     Transazione t1 = Transazione(700, false, "12-03-2007");
     Transazione t2 = Transazione(400, false, "10-09-2007");
     Transazione t3 = Transazione(100, true, "16-05-2010");
 
 
+    //Aggiunte al conto corrente ricevono un ID univoco
     c1.addTransazione(t1, ListaTransazioni);
     c1.addTransazione(t2, ListaTransazioni);
     c1.addTransazione(t3, ListaTransazioni);
 
+    //Funzione di modifica
     c1.modTransazione(2,300,false,"12-03-2000");
 
     c1.modTransazione(3,1000,true,"14-01-2003");
 
+    //Funzione di cancellazione
     c1.deleteTransazione(1);
+
 
     Transazione t4 = Transazione(20, false, "16-07-2030");
 
 
     c1.addTransazione(t4, ListaTransazioni);
 
+    //Funzione di aggiunta di transazioni da file
     c1.uploadTransazioni(ListaUpload);
 
     c1.deleteTransazione(6);
@@ -44,57 +51,11 @@ int main() {
 
     c1.addTransazione(t5, ListaTransazioni);
 
-    //c1.checkAllTransaizoni("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
-    c1.checkTransazione(t4,Estratto);
+    //Funzione di controllo della conciliazione
+    c1.checkTransazione(t5,Estratto);
 
-
-    /*Transazione t1 = Transazione(500,true,"11-02-24");
-    Transazione t2 = Transazione(600,true,"16-02-24");
-    Transazione t3 = Transazione(200,false,"19-02-24");
-
-    c1.EseguiTransazione(t1);
-    cout <<"Saldo dopo la prima transazione"<<c1.getSaldo()<<endl;
-    c1.EseguiTransazione(t2);
-    cout <<"Saldo dopo la seconda transazione"<<c1.getSaldo()<<endl;
-    c1.EseguiTransazione(t3);
-    cout <<"Saldo dopo la terza transazione"<<c1.getSaldo()<<endl;*/
-
-    /*ofstream fout("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //ios::app permentte di non sovrascrivere il file
-    fout << t3.getInfo();
-    fout.close();
-
-
-    char c;
-    ifstream fin("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt");
-    while(fin.get(c)){
-        cout << c;
-    }
-
-    fin.close();*/
-
-    /*ifstream fin("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Estratto.txt"); //apertura del file
-    std::string input;
-   while( std::getline(fin,input)) {
-       //vado a prendere la linea e con il ciclo while posso prenderne una ad una ed inserirla nella variabile input
-
-       istringstream iss(input); //prendo input
-       int x;
-       std::string In;
-       std::string data;
-
-       if (iss >> x >> In >> data) {
-           // con l'operatore >> posso estrarre l'input (divisi da spazi) e salvarlo nelle variabili
-           std::cout << "Importo: " << x << std::endl;
-           std::cout << "In: " << In << std::endl;
-           std::cout << "Data: " << data << std::endl;
-
-       } else {
-           std::cerr << "Errore nella lettura dei dati." << std::endl;
-       }
-   }
-    fin.close();*/
-
-    //fm.ReadExtractFile("/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/Transazioni.txt",c1);
+    //Test di conciliazione di tutte le transazioni
+    //c1.checkAllTransaizoni(Estratto);
 
 }
 
