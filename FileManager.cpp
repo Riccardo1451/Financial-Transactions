@@ -11,35 +11,47 @@ using namespace std;
 std::string VisualizzaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
 
 void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazione> &transazioni, ContoCorrente& cc) {
+    ifstream fin(nomeFile);
+    std::string input;
 
-    // il file deve essere scritto secondo il formato ID: int int stringa stringa stringa
-
-    ifstream fin (nomeFile); //apro il file
-    std::string input; //dove mantengo la riga temporaneamente
-
-    while (getline(fin,input)) {
-        istringstream iss(input); //riga nel file
+    while (getline(fin, input)) {
+        istringstream iss(input);
 
         int id, importo;
-        string in,data,conciliata;
+        std::string in, data, conciliata, id_label;
 
-        string id_label; //isolare ID:
-        iss >> id_label >> id;
+        // Estrai la riga
+        if (!(iss >> id_label >> id >> importo >> in >> data)) {
+            std::cerr << "Errore: Formato della transazione non valido.\n";
+            continue;
+        }
 
-        iss >> importo >> in >> data;
-        getline(iss,conciliata); //ci sono degli spazi
 
-        //creo la transazione e la inserisco nel vettore
+        getline(iss, conciliata);
 
-        bool opt = in == "Entrata" ? true:false;
-        bool conc = conciliata == " Conciliata" ? true:false;
 
-        Transazione temp = Transazione(importo,opt,data,conc);
-        cc.addTransazione(temp,"");
-        ScriviTransazioniSuFile(VisualizzaTransazioni,transazioni);
+        bool opt;
+        if (in == "Entrata") {
+            opt = true;
+        } else if (in == "Uscita") {
+            opt = false;
+        } else {
+            std::cerr << "Errore: Formato 'Entrata/Uscita' non valido nella transazione.\n";
+            continue;
+        }
 
+
+        bool conc = (conciliata == " Conciliata");
+
+
+        Transazione temp = Transazione(importo, opt, data, conc);
+        cc.addTransazione(temp, "");
+
+
+        ScriviTransazioniSuFile(VisualizzaTransazioni, transazioni);
     }
 }
+
 
 void FileManager::ScriviTransazioniSuFile(std::string nomeFile, vector<Transazione> &transazioni) {
     ofstream fout(nomeFile);

@@ -25,6 +25,8 @@ public:
     std::string getData();
     void setData(std::string data);
 
+    bool validaData(std::string exemp);
+
     std::string getInfo();
 
     int getID() const;

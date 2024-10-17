@@ -33,6 +33,7 @@ void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::
             transazione.setImporto(nuovoImporto);
             transazione.setIn(nuovoIn);
             transazione.setData(nuovaData);
+            cout<<"Transazione con ID: "+std::to_string(transazione.getID())+" modificata correttamente";
             fm.ScriviTransazioniSuFile(VisualizzaTransaizoni,Transazioni);
             return;
         }

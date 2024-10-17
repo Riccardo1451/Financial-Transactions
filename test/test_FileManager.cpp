@@ -31,8 +31,8 @@ TEST(FileManagerTest, TestGestioneFile) {
 
     std::ofstream fout(UploadTest);
     //Crea le Transazioni
-    fout << "ID: 1 200 Entrata 2023-09-01 Conciliata"<<std::endl;
-    fout << "ID: 2 300 Uscita 2023-09-02 Non Conciliata"<<std::endl;
+    fout << "ID: 1 200 Entrata 01-09-2023 Conciliata"<<std::endl;
+    fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
     fout.close();
 
     c1.uploadTransazioni(UploadTest);
@@ -42,16 +42,17 @@ TEST(FileManagerTest, TestGestioneFile) {
     //Verifica che le Transazioni siano presenti
     EXPECT_EQ(c1.Transazioni.back().getImporto(), 300);
     EXPECT_FALSE(c1.Transazioni.back().getIn());
-    EXPECT_EQ(c1.Transazioni.back().getData(), "2023-09-02");
+    EXPECT_EQ(c1.Transazioni.back().getData(), "02-09-2023");
     EXPECT_FALSE(c1.Transazioni.back().getConciliata());
 
     EXPECT_EQ(c1.Transazioni[c1.Transazioni.size()-2].getImporto(), 200);
     EXPECT_TRUE(c1.Transazioni[c1.Transazioni.size()-2].getIn());
-    EXPECT_EQ(c1.Transazioni[c1.Transazioni.size()-2].getData(), "2023-09-01");
+    EXPECT_EQ(c1.Transazioni[c1.Transazioni.size()-2].getData(), "01-09-2023");
     EXPECT_TRUE(c1.Transazioni[c1.Transazioni.size()-2].getConciliata());
 
-
 }
+
+//TODO: migliorare il test di upload da file, con formato errato
 TEST(FileManagerTest, TestConciliazione) {
 
     std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
@@ -59,15 +60,15 @@ TEST(FileManagerTest, TestConciliazione) {
     ContoCorrente c1 ("Mario Rossi");
 
     std::ofstream fout (UploadEstrattoTest);
-    fout << "ID: 1 200 Entrata 2023-09-01 Non Conciliata"<<std::endl;
-    fout << "ID: 2 300 Uscita 2023-09-02 Non Conciliata"<<std::endl;
-    fout << "ID: 3 700 Uscita 2007-11-27 Non Conciliata"<<std::endl;
+    fout << "ID: 1 200 Entrata 01-09-2023 Non Conciliata"<<std::endl;
+    fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
+    fout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
     fout.close();
 
     std::ofstream testout (EstrattoTest);
-    testout << "ID: 1 200 Entrata 2023-09-01 Non Conciliata"<<std::endl;
-    testout << "ID: 2 300 Uscita 2023-09-02 Non Conciliata"<<std::endl;
-    testout << "ID: 3 700 Uscita 2007-11-27 Non Conciliata"<<std::endl;
+    testout << "ID: 1 200 Entrata 01-09-2023 Non Conciliata"<<std::endl;
+    testout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
+    testout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
     testout.close();
 
     c1.uploadTransazioni(UploadEstrattoTest);

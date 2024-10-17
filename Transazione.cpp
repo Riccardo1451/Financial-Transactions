@@ -4,15 +4,30 @@
 
 #include "Transazione.h"
 #include <iostream>
+#include <regex>
 
 #include "googletest/googlemock/include/gmock/gmock-matchers.h"
 using namespace std;
 
 
-Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata)
-: Importo(Importo),In(in), data(data), Conciliata(conciliata),ID(0){ }
+Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata){
+    if (Importo < 0) {
+        std::cerr << "L'importo non può essere negativo.\n";
+        return;
+    }
 
-void Transazione::setImporto(int valore) {
+    if (!validaData(data)) {
+        std::cerr << " La data deve essere nel formato gg-mm-aaaa.\n";
+        return;
+    }
+
+    this->Importo = Importo;
+    this->In = in;
+    this->data = data;
+    this->Conciliata = conciliata;
+}
+
+void Transazione::setImporto(int valore){
     if (valore >= 0)
         this->Importo = valore;
     else cerr<<"L'importo non può essere negativo"<<endl;
@@ -52,6 +67,16 @@ bool Transazione::getConciliata() {
 
 void Transazione::setConciliata(bool opt) {
     Conciliata=opt;
+}
+
+bool Transazione::validaData(std::string exemp) {
+    std::regex formatoData("\\d{2}-\\d{2}-\\d{4}"); // formato xx-yy-zzzz
+
+    if(! std::regex_match(exemp,formatoData)) {
+        std::cerr<<"Formato data non valido.";
+        return false;
+    }
+    return true;
 }
 
 
