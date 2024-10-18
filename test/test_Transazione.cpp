@@ -25,8 +25,10 @@ TEST(TransazioneTest, TestSetter) {
     Transazione transazione(100, true, "27-09-2023");
 
     //Test con valore negativo
+    testing::internal::CaptureStderr();
     transazione.setImporto(-500);
-    EXPECT_EQ(transazione.getImporto(), 100);
+    std::string output = testing::internal::GetCapturedStderr();
+    EXPECT_EQ(output, "L'importo non può essere negativo\n");
 
     //Test modifica importo
     transazione.setImporto(100);
@@ -55,7 +57,7 @@ TEST(TransazioneTest, TestDataNonValida) {
     EXPECT_EQ(output, "Formato data non valido. La data deve essere nel formato gg-mm-aaaa.\n");
 }
 //TODO: test su formato transazioni
-//  migliorare test transazione con importo negativo
+//  migliorare test transazione con importo negativo OK
 //  verifica che se una transazione da conciliare non viene trovata venga restituito un errore/avviso
 //  verificare che tutte le transazione dall'estratto conto vengano conciliate altrimenti errore/avviso
 

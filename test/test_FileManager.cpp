@@ -54,7 +54,6 @@ TEST(FileManagerTest, TestGestioneFile) {
 
 //TODO: migliorare il test di upload da file, con formato errato
 TEST(FileManagerTest, TestConciliazione) {
-
     std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
     std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
     ContoCorrente c1 ("Mario Rossi");
@@ -85,4 +84,23 @@ TEST(FileManagerTest, TestConciliazione) {
 
     EXPECT_TRUE(c1.Transazioni[1].getConciliata());
     EXPECT_TRUE(c1.Transazioni[2].getConciliata());
+}
+
+TEST (FileManagerTest, TestNonConciliazione) {
+    //verifico che se una transazione non è conciliata risulti in errore
+    std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
+    std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
+    ContoCorrente c1("Mario Rossi");
+
+    std::ofstream testout (EstrattoTest);
+    testout << "ID: 1 200 Entrata 01-09-2023 Non Conciliata"<<std::endl;
+    testout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
+    testout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
+    testout.close();
+
+    Transazione temp (200, false, "03-12-2000"); //transazione non nell'estratto conto
+
+    c1.addTransazione(temp,"");
+
+    c1.checkTransazione()
 }
