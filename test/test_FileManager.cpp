@@ -102,5 +102,24 @@ TEST (FileManagerTest, TestNonConciliazione) {
 
     c1.addTransazione(temp,"");
 
-    c1.checkTransazione()
+    c1.checkTransazione(temp,EstrattoTest);
+}
+
+TEST (FileManagerTest, TestRefusoFormattazione){
+   //Verifica il comportamento quando dal file di upload il formato delle transazione è errato
+    std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
+    ContoCorrente c1("Mario Rossi");
+
+    std::ofstream testout (UploadEstrattoTest);
+    testout << "ID: 1 Entrata Non Conciliata 200 01-09-2023" << std::endl;
+    testout << "ID: 1 Non Conciliata 01-09-2023 Entrata 200" << std::endl; //Transazioni con formato errato
+    testout.close();
+
+    testing::internal::CaptureStderr();
+    //Tentativo di upload 
+    c1.uploadTransazioni(UploadEstrattoTest);
+
+    std::string output = testing::internal::GetCapturedStderr();
+    //ci aspettiamo un errore due volte consecutive 
+    EXPECT_EQ(output,"Errore: Formato della transazione non valido.\nErrore: Formato della transazione non valido.\n");
 }

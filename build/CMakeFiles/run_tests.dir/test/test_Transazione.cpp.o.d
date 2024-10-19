@@ -926,4 +926,6 @@ CMakeFiles/run_tests.dir/test/test_Transazione.cpp.o: \
   /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/googletest/googletest/include/gtest/gtest-typed-test.h \
   /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/googletest/googletest/include/gtest/gtest_pred_impl.h \
   /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/googletest/googletest/include/gtest/gtest_prod.h \
-  /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/../Transazione.h
+  /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/../ContoCorrente.h \
+  /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/../Transazione.h \
+  /Users/riccardofantechi/Desktop/Universita/Primo\ anno/Laboratorio\ di\ Programmazione/test/../FileManager.h

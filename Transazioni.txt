@@ -1,0 +1,4 @@
+ID: 0 1 Uscita  Non Conciliata
+ID: 0 1 Uscita  Non Conciliata
+ID: 0 1 Uscita  Non Conciliata
+Numero di transazioni eseguite : 3

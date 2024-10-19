@@ -1,6 +1,3 @@
-//
-// Created by Riccardo fantechi on 20/09/24.
-//
 
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
