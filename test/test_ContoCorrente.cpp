@@ -41,12 +41,16 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
 
 TEST(ContoCorrenteTest, TransazioniInesistenti) {
 
-    ContoCorrente c1("Mario Rossi", 5000);
+    ContoCorrente c1("Mario Rossi");
     Transazione t1(200, true, "12-01-2003");
     c1.addTransazione(t1, ListaTransazioni);
 
+    
+    testing::internal::CaptureStderr();
     // Tenta di modificare una transazione con ID inesistente
     c1.modTransazione(999, 500, false, "15-01-2003");
+    std::string output = testing::internal::GetCapturedStderr();
+    EXPECT_EQ(output,"Transazione con ID: "+std::to_string(999)+" non trovata.\n");
 
     // Verifica che la transazione originale non sia stata modificata
     EXPECT_EQ(c1.Transazioni.back().getImporto(), 200);

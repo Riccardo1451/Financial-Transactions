@@ -52,7 +52,6 @@ TEST(FileManagerTest, TestGestioneFile) {
 
 }
 
-//TODO: migliorare il test di upload da file, con formato errato
 TEST(FileManagerTest, TestConciliazione) {
     std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
     std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
@@ -101,8 +100,31 @@ TEST (FileManagerTest, TestNonConciliazione) {
     Transazione temp (200, false, "03-12-2000"); //transazione non nell'estratto conto
 
     c1.addTransazione(temp,"");
-
+    
+    testing::internal::CaptureStderr();
+    //Tentativo di conciliazione
     c1.checkTransazione(temp,EstrattoTest);
+    
+    std::string output = testing::internal::GetCapturedStderr();
+    EXPECT_EQ(output,"La transazione ID: "+std::to_string(temp.getID())+" non è ancora conciliata\n");
+
+    //Verifico che se tutte le transazioni non sono conciliate renda un messaggio di errore 
+    Transazione t1 (300, false, "02-09-2023");
+    Transazione t2 (700, false, "27-11-2007");
+    Transazione t3 (200, true, "01-09-2023");
+    Transazione tn (150, true, "04-25-2001");
+
+    c2.addTransazione(t1,"");
+    c2.addTransazione(t2,"");
+    c2.addTransazione(t3,"");
+    c2.addTransazione(tn,""); //Transazione non presente
+
+    testing::internal::CaptureStderr();
+    c2.checkAllTransaizoni(EstrattoTest);
+    output = testing::internal::GetCapturedStderr();
+    EXPECT_EQ(output, "Ci sono alcune transazioni non conciliate, verifica l'estratto conto\n");
+  
+   
 }
 
 TEST (FileManagerTest, TestRefusoFormattazione){

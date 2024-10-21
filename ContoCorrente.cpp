@@ -38,7 +38,7 @@ void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::
             return;
         }
     }
-    cerr <<"Transaizone con ID: "<<ID<<" non trovata"<<endl;
+    cerr <<"Transazione con ID: "<<ID<<" non trovata."<<endl;
 }
 
 void ContoCorrente::deleteTransazione(int ID) {

@@ -22,7 +22,7 @@ void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazio
 
         // Estrai la riga
         if (!(iss >> id_label >> id >> importo >> in >> data)) {
-            std::cerr << "Errore: Formato della transazione non valido.\n";
+            std::cerr << "Errore: Formato della transazione non valido."<<std::endl;
             continue;
         }
 
@@ -36,7 +36,7 @@ void FileManager::CaricaTransazioniDaFile(std::string nomeFile, vector<Transazio
         } else if (in == "Uscita") {
             opt = false;
         } else {
-            std::cerr << "Errore: Formato 'Entrata/Uscita' non valido nella transazione.\n";
+            std::cerr << "Errore: Formato 'Entrata/Uscita' non valido nella transazione.";
             continue;
         }
 
@@ -127,7 +127,13 @@ void FileManager::ConciliaAllTransazioni(std::string estrattoConto, std::vector<
                 }
         }
     }
-
+    //Check di tutte le transazioni che siano conciliate -> Altrimenti notifica
+    for(auto &transazione : transazioni){
+      //verifica che siano conciliate
+      if(!transazione.getConciliata()){
+        std::cerr << "Ci sono alcune transazioni non conciliate, verifica l'estratto conto\n";
+      }
+    }
     ScriviTransazioniSuFile(VisualizzaTransazioni, transazioni);
 }
 

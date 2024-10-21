@@ -19,6 +19,7 @@ TEST(TransazioneTest, TestValoriIniziali) {
 
     //Verifica che non sia conciliata
     EXPECT_FALSE(transazione.getConciliata());
+
 }
 
 TEST(TransazioneTest, TestSetter) {
@@ -50,16 +51,18 @@ TEST(TransazioneTest, TestSetter) {
     EXPECT_EQ(transazione.getInfo(),"ID: "+std::to_string(transazione.getID())+" "+std::to_string(100)+" "+"Uscita"+" "+"13-07-2002"+" "+"Conciliata");
 
 }
-TEST(TransazioneTest, TestDataNonValida) {
+TEST(TransazioneTest, TestDatiNonValidi) {
     testing::internal::CaptureStderr(); // Cattura errore
     Transazione t1(200, true, "323-13-2003", false); // Data non valida
     std::string output = testing::internal::GetCapturedStderr(); // Cattura l'output di errore
     EXPECT_EQ(output, "Formato data non valido. La data deve essere nel formato gg-mm-aaaa.\n");
+
+    testing::internal::CaptureStderr();
+    Transazione t2(-250, true, "23-13-2003", false); // Importo negativo non valido
+    output = testing::internal::GetCapturedStderr();
+    EXPECT_EQ(output, "L'importo non può essere negativo.\n");
 }
-//TODO: test su formato transazioni
-//  migliorare test transazione con importo negativo OK
-//  verifica che se una transazione da conciliare non viene trovata venga restituito un errore/avviso
-//  verificare che tutte le transazione dall'estratto conto vengano conciliate altrimenti errore/avviso
+//Test su formato transazioni
 
 //TODO:Come gestire transazine duplicate ??
 TEST(TransazioneTestIncrementalID, TestID) {
@@ -76,6 +79,6 @@ TEST(TransazioneTestIncrementalID, TestID) {
 
 
 int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
+   ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }

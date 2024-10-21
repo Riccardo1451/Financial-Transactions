@@ -1,6 +1,3 @@
-//
-// Created by Riccardo fantechi on 20/09/24.
-//
 
 #ifndef CONTOCORRENTE_H
 #define CONTOCORRENTE_H
@@ -45,7 +42,7 @@ private:
     friend class ContoCorrenteTest_TransazioniInesistenti_Test;
     friend class FileManagerTest_TestGestioneFile_Test;
     friend class FileManagerTest_TestConciliazione_Test;
-;
+    
 };
 
 
