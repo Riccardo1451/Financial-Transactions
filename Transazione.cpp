@@ -9,7 +9,7 @@ using namespace std;
 
 Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata){
     if (Importo < 0) {
-        std::cerr << "L'importo non può essere negativo.\n";
+        std::cerr << "L'importo non può essere negativo.\n"; //TODO:lanciare eccezioni
         return;
     }
 
@@ -27,7 +27,7 @@ Transazione::Transazione(int Importo, bool in, std::string data, bool conciliata
 void Transazione::setImporto(int valore){
     if (valore >= 0)
         this->Importo = valore;
-    else cerr<<"L'importo non può essere negativo"<<endl;
+    else cerr<<"L'importo non può essere negativo"<<endl; //TODO: anche booleano
 }
 void Transazione::setIn(bool opzione) {
     this->In = opzione;
@@ -70,7 +70,7 @@ bool Transazione::validaData(std::string exemp) {
     std::regex formatoData("\\d{2}-\\d{2}-\\d{4}"); // formato xx-yy-zzzz
 
     if(! std::regex_match(exemp,formatoData)) {
-        std::cerr<<"Formato data non valido.";
+        std::cerr<<"Formato data non valido."; //TODO : occhio al cerr
         return false;
     }
     return true;
