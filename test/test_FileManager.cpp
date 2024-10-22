@@ -114,6 +114,8 @@ TEST (FileManagerTest, TestNonConciliazione) {
     Transazione t3 (200, true, "01-09-2023");
     Transazione tn (150, true, "04-25-2001");
 
+    ContoCorrente c2 ("Mario Verdi");
+
     c2.addTransazione(t1,"");
     c2.addTransazione(t2,"");
     c2.addTransazione(t3,"");
