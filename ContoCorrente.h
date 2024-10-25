@@ -21,12 +21,13 @@ public:
 
     void deleteTransazione(int ID);
 
-    void uploadTransazioni(std::string nomeFile); //TODO: load
+    void loadTransazioni(std::string nomeFile);
     //TODO: cercare transazioni
 
     void checkTransazione(Transazione &transazione,std::string estrattoConto);
-    void checkAllTransaizoni(std::string estrattoConto); //TODO: refactor
+    void checkAllTransazioni(std::string estrattoConto);
 
+    std::vector<Transazione> getTransazioni() const;
 
 
 private:
@@ -37,13 +38,6 @@ private:
 
     std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
     FileManager fm;
-
-    //TODO : rimuovere friend
-    friend class ContoCorrenteTest_TestOPTransazioni_Test;
-    friend class ContoCorrenteTest_TransazioniInesistenti_Test;
-    friend class FileManagerTest_TestGestioneFile_Test;
-    friend class FileManagerTest_TestConciliazione_Test;
-    
 };
 
 

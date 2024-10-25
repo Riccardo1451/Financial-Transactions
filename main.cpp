@@ -43,7 +43,7 @@ int main() {
     c1.addTransazione(t4, ListaTransazioni);
 
     //Funzione di aggiunta di transazioni da file
-    c1.uploadTransazioni(ListaUpload);
+    c1.loadTransazioni(ListaUpload);
 
     c1.deleteTransazione(6);
 

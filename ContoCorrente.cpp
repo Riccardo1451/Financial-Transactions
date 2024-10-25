@@ -55,16 +55,22 @@ void ContoCorrente::deleteTransazione(int ID) {
     }
 }
 
-void ContoCorrente::uploadTransazioni(std::string nomeFile) {
+void ContoCorrente::loadTransazioni(std::string nomeFile) {
     fm.CaricaTransazioniDaFile(nomeFile,Transazioni,*this);
 }
 
 void ContoCorrente::checkTransazione(Transazione &transazione, std::string estrattoConto) {
     fm.ConciliaTransazione(transazione,estrattoConto,Transazioni);
 }
-void ContoCorrente::checkAllTransaizoni(std::string estrattoConto) {
+void ContoCorrente::checkAllTransazioni(std::string estrattoConto) {
     fm.ConciliaAllTransazioni(estrattoConto,Transazioni);
 }
+
+std::vector<Transazione> ContoCorrente::getTransazioni() const {
+    return Transazioni;
+}
+
+
 
 
 

@@ -35,20 +35,19 @@ TEST(FileManagerTest, TestGestioneFile) {
     fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
     fout.close();
 
-    c1.uploadTransazioni(UploadTest);
+    c1.loadTransazioni(UploadTest);
 
-    EXPECT_EQ(c1.Transazioni.size(),2);
-
+    EXPECT_EQ(c1.getTransazioni().size(),2);
     //Verifica che le Transazioni siano presenti
-    EXPECT_EQ(c1.Transazioni.back().getImporto(), 300);
-    EXPECT_FALSE(c1.Transazioni.back().getIn());
-    EXPECT_EQ(c1.Transazioni.back().getData(), "02-09-2023");
-    EXPECT_FALSE(c1.Transazioni.back().getConciliata());
+    EXPECT_EQ(c1.getTransazioni().back().getImporto(), 300);
+    EXPECT_FALSE(c1.getTransazioni().back().getIn());
+    EXPECT_EQ(c1.getTransazioni().back().getData(), "02-09-2023");
+    EXPECT_FALSE(c1.getTransazioni().back().getConciliata());
 
-    EXPECT_EQ(c1.Transazioni[c1.Transazioni.size()-2].getImporto(), 200);
-    EXPECT_TRUE(c1.Transazioni[c1.Transazioni.size()-2].getIn());
-    EXPECT_EQ(c1.Transazioni[c1.Transazioni.size()-2].getData(), "01-09-2023");
-    EXPECT_TRUE(c1.Transazioni[c1.Transazioni.size()-2].getConciliata());
+    EXPECT_EQ(c1.getTransazioni()[c1.getTransazioni().size()-2].getImporto(), 200);
+    EXPECT_TRUE(c1.getTransazioni()[c1.getTransazioni().size()-2].getIn());
+    EXPECT_EQ(c1.getTransazioni()[c1.getTransazioni().size()-2].getData(), "01-09-2023");
+    EXPECT_TRUE(c1.getTransazioni()[c1.getTransazioni().size()-2].getConciliata());
 
 }
 
@@ -69,20 +68,20 @@ TEST(FileManagerTest, TestConciliazione) {
     testout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
     testout.close();
 
-    c1.uploadTransazioni(UploadEstrattoTest);
+    c1.loadTransazioni(UploadEstrattoTest);
 
     //Verifico che la Transazione sia conciliata
-    Transazione temp = c1.Transazioni[0];
+    Transazione temp = c1.getTransazioni()[0];
 
     c1.checkTransazione(temp,EstrattoTest);
 
     EXPECT_TRUE(temp.getConciliata());
 
     //Verifico anche il metodo per tutte le Transazioni
-    c1.checkAllTransaizoni(EstrattoTest);
+    c1.checkAllTransazioni(EstrattoTest);
 
-    EXPECT_TRUE(c1.Transazioni[1].getConciliata());
-    EXPECT_TRUE(c1.Transazioni[2].getConciliata());
+    EXPECT_TRUE(c1.getTransazioni()[1].getConciliata());
+    EXPECT_TRUE(c1.getTransazioni()[2].getConciliata());
 }
 
 TEST (FileManagerTest, TestNonConciliazione) {
@@ -122,7 +121,7 @@ TEST (FileManagerTest, TestNonConciliazione) {
     c2.addTransazione(tn,""); //Transazione non presente
 
     testing::internal::CaptureStderr();
-    c2.checkAllTransaizoni(EstrattoTest);
+    c2.checkAllTransazioni(EstrattoTest);
     output = testing::internal::GetCapturedStderr();
     EXPECT_EQ(output, "Ci sono alcune transazioni non conciliate, verifica l'estratto conto\n");
   
@@ -141,7 +140,7 @@ TEST (FileManagerTest, TestRefusoFormattazione){
 
     testing::internal::CaptureStderr();
     //Tentativo di upload 
-    c1.uploadTransazioni(UploadEstrattoTest);
+    c1.loadTransazioni(UploadEstrattoTest);
 
     std::string output = testing::internal::GetCapturedStderr();
     //ci aspettiamo un errore due volte consecutive 
