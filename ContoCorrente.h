@@ -22,6 +22,8 @@ public:
     void deleteTransazione(int ID);
 
     void loadTransazioni(std::string nomeFile);
+
+    Transazione searchTransazione() const;
     //TODO: cercare transazioni
 
     void checkTransazione(Transazione &transazione,std::string estrattoConto);

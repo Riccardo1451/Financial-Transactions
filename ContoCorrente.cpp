@@ -54,6 +54,8 @@ void ContoCorrente::deleteTransazione(int ID) {
         cerr << "Transazione con ID " << ID << " non trovata." << std::endl; // Messaggio di errore se non trovata
     }
 }
+Transazione ContoCorrente::searchTransazione()const{
+}
 
 void ContoCorrente::loadTransazioni(std::string nomeFile) {
     fm.CaricaTransazioniDaFile(nomeFile,Transazioni,*this);
