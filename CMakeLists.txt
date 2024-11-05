@@ -16,6 +16,8 @@ set(SOURCE_FILES
         ContoCorrente.h
         FileManager.cpp
         FileManager.h
+        ObjectNotFound.h
+        ObjectNotReady.h
 )
 
 # Aggiungi i file sorgenti dei test.

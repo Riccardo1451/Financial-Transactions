@@ -11,28 +11,28 @@
 class ContoCorrente {
 
 public:
-    ContoCorrente(std::string Nome, int Budget = 0); //TODO: budget come si modifica, ogni add,mod,delte
+    ContoCorrente(std::string Nome, int Budget = 0);
 
     std::string getNome() const;
 
     void addTransazione(Transazione & Transazione, std::string Percorso);
 
-    void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData); //TODO: ID->mappa
+    void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData);
 
     void deleteTransazione(int ID);
 
-    void loadTransazioni(std::string nomeFile);
-
     Transazione searchTransazione() const;
     //TODO: cercare transazioni
-
-
     void WriteTransactionOnFile(std::string fileName, std::vector<Transazione> &transazioni);
-    void LoadTransactionFromFile(std::string fileName, std::vector<Transazione> &transazioni);
-    void ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto, std::vector<Transazione> &transazioni);
-    void ConciliaAllTransactions(std::string estrattoConto, std::vector<Transazione> &transazioni);
-    std::vector<Transazione> getTransazioni() const;
 
+    void LoadTransactionFromFile(const std::string& fileName, std::vector<Transazione> &transazioni);
+
+    void ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto, std::vector<Transazione> &transazioni);
+
+    void ConciliaAllTransactions(const std::string& estrattoConto, std::vector<Transazione> &transazioni);
+
+    std::vector<Transazione> getTransazioni() const;
+    int getBudget() const;
 
 private:
     std::string Intestatario;

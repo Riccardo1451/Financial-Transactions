@@ -34,7 +34,7 @@ public:
 
 private:
 
-    bool validaData(std::string exemp); //TODO: eccezioni
+    bool validaData(std::string exemp);
 
     int Importo;
     bool In; //True se l'operazione è in entrata, False altrimenti
