@@ -43,7 +43,7 @@ int main() {
     c1.addTransazione(t4, ListaTransazioni);
 
     //Funzione di aggiunta di transazioni da file
-    c1.loadTransazioni(ListaUpload);
+    c1.LoadTransactionFromFile(ListaUpload);
 
     c1.deleteTransazione(6);
 
@@ -52,7 +52,7 @@ int main() {
     c1.addTransazione(t5, ListaTransazioni);
 
     //Funzione di controllo della conciliazione
-    c1.checkTransazione(t5,Estratto);
+    c1.ConciliaTransaction(t5,Estratto);
 
     //Test di conciliazione di tutte le transazioni
     //c1.checkAllTransaizoni(Estratto);

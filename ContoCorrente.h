@@ -25,11 +25,11 @@ public:
     //TODO: cercare transazioni
     void WriteTransactionOnFile(std::string fileName, std::vector<Transazione> &transazioni);
 
-    void LoadTransactionFromFile(const std::string& fileName, std::vector<Transazione> &transazioni);
+    void LoadTransactionFromFile(const std::string& fileName);
 
-    void ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto, std::vector<Transazione> &transazioni);
+    void ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto);
 
-    void ConciliaAllTransactions(const std::string& estrattoConto, std::vector<Transazione> &transazioni);
+    void ConciliaAllTransactions(const std::string& estrattoConto);
 
     std::vector<Transazione> getTransazioni() const;
     int getBudget() const;

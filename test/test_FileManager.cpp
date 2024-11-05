@@ -143,6 +143,7 @@ TEST (FileManagerTest, TestRefusoFormattazione){
     c1.loadTransazioni(UploadEstrattoTest);
 
     std::string output = testing::internal::GetCapturedStderr();
-    //ci aspettiamo un errore due volte consecutive 
+    //ci aspettiamo un errore due volte consecutive
     EXPECT_EQ(output,"Errore: Formato della transazione non valido.\nErrore: Formato della transazione non valido.\n");
+
 }

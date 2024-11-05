@@ -26,10 +26,9 @@ TEST(TransazioneTest, TestSetter) {
     Transazione transazione(100, true, "27-09-2023");
 
     //Test con valore negativo
-    testing::internal::CaptureStderr();
-    transazione.setImporto(-500);
-    std::string output = testing::internal::GetCapturedStderr();
-    EXPECT_EQ(output, "L'importo non può essere negativo\n");
+
+
+    EXPECT_THROW(transazione.setImporto(-500),std::invalid_argument);
 
     //Test modifica importo
     transazione.setImporto(100);
@@ -52,15 +51,8 @@ TEST(TransazioneTest, TestSetter) {
 
 }
 TEST(TransazioneTest, TestDatiNonValidi) {
-    testing::internal::CaptureStderr(); // Cattura errore
-    Transazione t1(200, true, "323-13-2003", false); // Data non valida
-    std::string output = testing::internal::GetCapturedStderr(); // Cattura l'output di errore
-    EXPECT_EQ(output, "Formato data non valido. La data deve essere nel formato gg-mm-aaaa.\n");
-
-    testing::internal::CaptureStderr();
-    Transazione t2(-250, true, "23-13-2003", false); // Importo negativo non valido
-    output = testing::internal::GetCapturedStderr();
-    EXPECT_EQ(output, "L'importo non può essere negativo.\n");
+    EXPECT_THROW(Transazione t1(200, true, "323-13-2003", false), std::invalid_argument);
+    EXPECT_THROW(Transazione t2(-250, true, "23-13-2003", false), std::invalid_argument);
 }
 //Test su formato transazioni
 

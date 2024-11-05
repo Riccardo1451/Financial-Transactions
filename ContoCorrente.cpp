@@ -101,7 +101,7 @@ void ContoCorrente::WriteTransactionOnFile(std::string fileName, std::vector<Tra
 
     fout.close(); // Chiudi il file
 }
-void ContoCorrente::LoadTransactionFromFile(const std::string& fileName, std::vector<Transazione> &transazioni) {
+void ContoCorrente::LoadTransactionFromFile(const std::string& fileName) {
     ifstream fin(fileName);
     std::string input;
 
@@ -138,12 +138,12 @@ void ContoCorrente::LoadTransactionFromFile(const std::string& fileName, std::ve
         addTransazione(temp, "");
 
 
-        WriteTransactionOnFile(ViewTransaction, transazioni);
+        WriteTransactionOnFile(ViewTransaction, Transazioni);
     }
 }
 
 
-void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto, std::vector<Transazione> &transazioni) {
+void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto) {
     ifstream fin(estrattoConto);  // Apro l'estratto conto
     std::string input;
 
@@ -162,13 +162,13 @@ void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::str
             transazione.getIn() == tipoIn &&
             transazione.getData() == data) {
             //Cerca corrispondenze
-            for (auto &trans : transazioni) {
+            for (auto &trans : Transazioni) {
                 if (trans.getImporto() == importo &&
                     trans.getIn() == tipoIn &&
                     trans.getData() == data) {
                     transazione.setConciliata(true);
                     trans.setConciliata(true);
-                    WriteTransactionOnFile(ViewTransaction, transazioni);
+                    WriteTransactionOnFile(ViewTransaction, Transazioni);
                     return;
                     }
             }
@@ -178,7 +178,7 @@ void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::str
 
 }
 
-void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto, std::vector<Transazione> &transazioni) {
+void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto) {
     ifstream fin(estrattoConto);
     std::string input;
 
@@ -192,7 +192,7 @@ void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto, st
 
         bool tipoIn = (tipo == "Entrata");
 
-        for (auto &transazione : transazioni) {
+        for (auto &transazione : Transazioni) {
             if (transazione.getImporto() == importo &&
                 transazione.getIn() == tipoIn &&
                 transazione.getData() == data) {
@@ -201,13 +201,13 @@ void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto, st
         }
     }
     //Check di tutte le transazioni che siano conciliate -> Altrimenti notifica
-    for(auto &transazione : transazioni){
+    for(auto &transazione : Transazioni){
         //verifica che siano conciliate
         if(!transazione.getConciliata()){
             throw ObjectNotReady("Ci sono alcune transazioni non ancora conciliate, verifica l'estratto conto");
         }
     }
-    WriteTransactionOnFile(ViewTransaction, transazioni);
+    WriteTransactionOnFile(ViewTransaction, Transazioni);
 }
 
 
