@@ -15,7 +15,7 @@ public:
 
     std::string getNome() const;
 
-    void addTransazione(Transazione &Transazione, std::string Percorso); //TODO:const
+    void addTransazione(Transazione & Transazione, std::string Percorso);
 
     void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData); //TODO: ID->mappa
 
@@ -26,9 +26,11 @@ public:
     Transazione searchTransazione() const;
     //TODO: cercare transazioni
 
-    void checkTransazione(Transazione &transazione,std::string estrattoConto);
-    void checkAllTransazioni(std::string estrattoConto);
 
+    void WriteTransactionOnFile(std::string fileName, std::vector<Transazione> &transazioni);
+    void LoadTransactionFromFile(std::string fileName, std::vector<Transazione> &transazioni);
+    void ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto, std::vector<Transazione> &transazioni);
+    void ConciliaAllTransactions(std::string estrattoConto, std::vector<Transazione> &transazioni);
     std::vector<Transazione> getTransazioni() const;
 
 
@@ -39,7 +41,6 @@ private:
     int IDcontatore;
 
     std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
-    FileManager fm;
 };
 
 

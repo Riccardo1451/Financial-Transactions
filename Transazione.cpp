@@ -41,7 +41,7 @@ bool Transazione::getIn() const{
     return In;
 }
 
-std::string Transazione::getData() {
+std::string Transazione::getData() const {
     return data;
 }
 
@@ -77,7 +77,7 @@ bool Transazione::validaData(std::string exemp) {
 }
 
 
-std::string Transazione::getInfo() {
+std::string Transazione::getInfo() const {
     //Andiamo a creare una stringa per ogni transazione in modo che possiamo scriverla su un file
     std::string IO = In ? "Entrata" : "Uscita";
     std::string Conc = Conciliata ? "Conciliata" : "Non Conciliata";

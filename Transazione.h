@@ -22,15 +22,14 @@ public:
     bool getConciliata();
     void setConciliata(bool opt);
 
-    std::string getData();
+    std::string getData() const;
     void setData(std::string data);
 
 
-    std::string getInfo();
+    std::string getInfo() const;
 
 
     int getID() const;
-
     void setID(int value);
 
 private:
