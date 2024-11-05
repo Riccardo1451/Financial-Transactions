@@ -18,18 +18,20 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     Transazione t1 (200, true, "12-01-2003");
     Transazione t2(300, false, "13-01-2003");
     c1.addTransazione(t1, ListaTransazioni);
+    std::map<int, Transazione> transazioni = c1.getTransazioni();
+    EXPECT_EQ(transazioni.size(),1);
 
-
+    auto it = transazioni.find(t1.getID());
     //Test su aggiunta Transazione al CC
-    EXPECT_EQ(t1.getInfo(), c1.getTransazioni().back().getInfo());
+    EXPECT_NE(it,transazioni.end());
 
     //Test sulla modifica di una Transazione dal CC
     int IDTest = t1.getID();
     c1.modTransazione(IDTest,400,false,"16-05-2000");
     //Verifico se la transazione ne CC è stata modificata correttamente
-    EXPECT_EQ(c1.getTransazioni().back().getImporto(),400);
-    EXPECT_FALSE(c1.getTransazioni().back().getIn());
-    EXPECT_EQ(c1.getTransazioni().back().getData(), "16-05-2000");
+    EXPECT_EQ(transazioni[it->second.getID()].getImporto(),400);
+    EXPECT_FALSE(it->second.getIn());
+    EXPECT_EQ(it->second.getData(), "16-05-2000");
 
     c1.addTransazione(t2, ListaTransazioni);
 
@@ -40,7 +42,7 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     c1.deleteTransazione(IDTest);
     //Verifico il numero di Transazioni e che sia rimasta solo la 2
     ASSERT_EQ(c1.getTransazioni().size(),1);
-    EXPECT_EQ(c1.getTransazioni().back().getID(),t2.getID());
+    EXPECT_EQ(c1.getTransazioni().end()->second.getID(),t2.getID());
 }
 
 TEST(ContoCorrenteTest, TransazioniInesistenti) {
@@ -53,16 +55,16 @@ TEST(ContoCorrenteTest, TransazioniInesistenti) {
     EXPECT_THROW(c1.modTransazione(999, 500, false, "15-01-2003"), ObjectNotFound);
 
     // Verifica che la transazione originale non sia stata modificata
-    EXPECT_EQ(c1.getTransazioni().back().getImporto(), 200);
-    EXPECT_TRUE(c1.getTransazioni().back().getIn());
-    EXPECT_EQ(c1.getTransazioni().back().getData(), "12-01-2003");
+    EXPECT_EQ(c1.getTransazioni().end()->second.getImporto(), 200);
+    EXPECT_TRUE(c1.getTransazioni().end()->second.getIn());
+    EXPECT_EQ(c1.getTransazioni().end()->second.getData(), "12-01-2003");
 
     // Tenta di cancellare una transazione con ID inesistente
     EXPECT_THROW(c1.deleteTransazione(999),ObjectNotFound);
 
     // Verifica che la transazione originale non sia stata cancellata
     ASSERT_EQ(c1.getTransazioni().size(), 1);
-    EXPECT_EQ(c1.getTransazioni().back().getID(), t1.getID());
+    EXPECT_EQ(c1.getTransazioni().end()->second.getID(), t1.getID());
 }
 TEST(ContoCorrenteTest, TestGestioneFile) {
     std::string PercorsoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/ListaTest.txt";
@@ -97,16 +99,18 @@ TEST(ContoCorrenteTest, TestGestioneFile) {
 
     EXPECT_EQ(c1.getTransazioni().size(),2);
     //Verifica che le Transazioni siano presenti
-    EXPECT_EQ(c1.getTransazioni().back().getImporto(), 300);
-    EXPECT_FALSE(c1.getTransazioni().back().getIn());
-    EXPECT_EQ(c1.getTransazioni().back().getData(), "02-09-2023");
-    EXPECT_FALSE(c1.getTransazioni().back().getConciliata());
+    EXPECT_EQ(c1.getTransazioni().end()->second.getImporto(), 300);
+    EXPECT_FALSE(c1.getTransazioni().end()->second.getIn());
+    EXPECT_EQ(c1.getTransazioni().end()->second.getData(), "02-09-2023");
+    EXPECT_FALSE(c1.getTransazioni().end()->second.getConciliata());
+    auto it = c1.getTransazioni();
+    auto lastTransactionIt = std::prev(it.end(), 2);
 
-    EXPECT_EQ(c1.getTransazioni()[c1.getTransazioni().size()-2].getImporto(), 200);
-    EXPECT_TRUE(c1.getTransazioni()[c1.getTransazioni().size()-2].getIn());
-    EXPECT_EQ(c1.getTransazioni()[c1.getTransazioni().size()-2].getData(), "01-09-2023");
-    EXPECT_TRUE(c1.getTransazioni()[c1.getTransazioni().size()-2].getConciliata());
-
+    // Test con Google Test
+    EXPECT_EQ(lastTransactionIt->second.getImporto(), 200);
+    EXPECT_TRUE(lastTransactionIt->second.getIn());
+    EXPECT_EQ(lastTransactionIt->second.getData(), "01-09-2023");
+    EXPECT_TRUE(lastTransactionIt->second.getConciliata());
 }
 TEST(ContoCorrenteTest, TestConciliazione) {
     std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";

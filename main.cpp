@@ -55,7 +55,7 @@ int main() {
     c1.ConciliaTransaction(t5,Estratto);
 
     //Test di conciliazione di tutte le transazioni
-    //c1.checkAllTransaizoni(Estratto);
+    //c1.ConciliaAllTransactions(Estratto);
 
 }
 

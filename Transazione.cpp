@@ -65,7 +65,7 @@ void Transazione::setConciliata(bool opt) {
 }
 
 bool Transazione::validaData(std::string exemp) {
-    std::regex formatoData("\\d{2}-\\d{2}-\\d{4}"); // formato xx-yy-zzzz
+    std::regex formatoData(R"(\d{2}-\d{2}-\d{4})"); // formato xx-yy-zzzz
 
     if(! std::regex_match(exemp,formatoData)) {
         return false;

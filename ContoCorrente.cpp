@@ -1,6 +1,3 @@
-//
-// Created by Riccardo fantechi on 20/09/24.
-//
 
 #include "ContoCorrente.h"
 #include "ObjectNotFound.h"
@@ -15,89 +12,105 @@ using namespace std;
 
 std::string ViewTransaction ="/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
 
+ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome),IDcontatore(1){}
+
 std::string ContoCorrente::getNome() const {
     return Intestatario;
 }
 
 
-ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome),IDcontatore(1) {}
 
 
 
-void ContoCorrente::addTransazione(Transazione &Transazione, std::string Percorso) {
+void ContoCorrente::addTransazione(Transazione& transazione, std::string Percorso) {
     //Gestione budget
-    if (Transazione.getIn())
-        Budget += Transazione.getImporto();
+    if (transazione.getIn())
+        Budget += transazione.getImporto();
     else
-        Budget -= Transazione.getImporto();
+        Budget -= transazione.getImporto();
 
     //Viene passata una transazione da inserire nel file delle transazioni
-    Transazione.setID(IDcontatore++);
-    Transazioni.push_back(Transazione);
+    transazione.setID(IDcontatore++);
+    Transazioni[transazione.getID()] = transazione;
+
     WriteTransactionOnFile(Percorso,Transazioni);
     //Vado a scrivere sul file estratto ogni operazione
 }
 
 void ContoCorrente::modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData) {
-    //Tramite ID posso prendere la transazioni relativa e modificarla
-    for(auto& transazione : Transazioni) {
-        if(transazione.getID() == ID) { //Gestione dell'attributo Budget
-            if (transazione.getIn()){ //controllo se la transazione da modificare era in ingresso o uscita
-                Budget -= transazione.getImporto();
-                if(nuovoIn) //se la nuova transazione è in ingresso sommo altrimento sottraggo
-                    Budget += nuovoImporto;
-                else
-                    Budget -= nuovoImporto;
-            }
-            else {
-                Budget += transazione.getImporto();
-                if (nuovoIn)
-                    Budget += nuovoImporto;
-                else
-                    Budget -= nuovoImporto;
-            }
+    //Con una struttura map utilizziamo find(ID) per cercare direttamente la relativa transazione eliminando il ciclo for
+    auto it = Transazioni.find(ID);
+
+    if (it != Transazioni.end()){ //se la transazione esiste
+        Transazione& transazione = it->second; //recupero la transazione
+
+        //Gestione dell'attributo Budget
+        if (transazione.getIn()) {
+            //controllo se la transazione da modificare era in ingresso o uscita
+            Budget -= transazione.getImporto();
+            if (nuovoIn) //se la nuova transazione è in ingresso sommo altrimento sottraggo
+                Budget += nuovoImporto;
+            else
+                Budget -= nuovoImporto;
+        } else {
+            Budget += transazione.getImporto();
+            if (nuovoIn)
+                Budget += nuovoImporto;
+            else
+                Budget -= nuovoImporto;
+        }
+        //modifico la transazione che è un riferimento all'oggetto
             transazione.setImporto(nuovoImporto);
             transazione.setIn(nuovoIn);
             transazione.setData(nuovaData);
             cout<<"Transazione con ID: "+std::to_string(transazione.getID())+" modificata correttamente"<<std::endl;
             WriteTransactionOnFile(ViewTransaction,Transazioni);
-            return;
         }
-    }
-    throw ObjectNotFound("Transazione "+to_string(ID)+" non trovata");
+    else throw ObjectNotFound("Transazione "+to_string(ID)+" non trovata");
 }
 
 void ContoCorrente::deleteTransazione(int ID) {
-    //Tramite ID vado a rimuovere la transazioni dal file e dal vettore
-    auto it = std::remove_if(Transazioni.begin(), Transazioni.end(), [ID](const Transazione& t) {return t.getID() == ID;}); // Ritorna true se l'ID corrisponde;
+    //Tramite il metodo find cerco la transazione e la elimino
+    auto it = Transazioni.find(ID);
 
-    if (it != Transazioni.end()) {
-        if(it->getIn())
-            Budget -= it->getImporto();
+    if(it != Transazioni.end()) {
+        if(it->second.getIn())
+            Budget -= it->second.getImporto();
         else
-            Budget += it->getImporto();
+            Budget += it->second.getImporto();
 
-        Transazioni.erase(it, Transazioni.end()); // Rimuovi le transazioni trovate
+
+        Transazioni.erase(it); // Rimuovi le transazioni trovate
         WriteTransactionOnFile(ViewTransaction,Transazioni);
     } else {
         throw ObjectNotFound("La transazione con ID: "+to_string(ID)+" non è stata trovata");
     }
 }
-Transazione ContoCorrente::searchTransazione()const{
+
+std::map<int,Transazione> ContoCorrente::searchTransazione(Transazione transazione)const{
+    std::map <int,Transazione> result;
+    auto it = Transazioni.find(transazione.getID());
+
+    if(it != Transazioni.end()) {
+        result[it->first] = it->second;
+    }
+    return result; //altrimente ritorna una map vuota
 }
-void ContoCorrente::WriteTransactionOnFile(std::string fileName, std::vector<Transazione> &transazioni) {
+
+void ContoCorrente::WriteTransactionOnFile(std::string fileName, std::map<int, Transazione> &transazioni) {
     ofstream fout(fileName);
-    int count = 0; //tenere di conto del numero di transazioni
 
-    for (auto& transazione : transazioni) {
-        fout << transazione.getInfo() << std::endl; // Scrive l'info della transazione
-
-        count++;
+    if(!fout.is_open()) {
+        throw runtime_error("Errore: impossibile aprire il file di testo");
     }
 
-    fout << "Numero di transazioni eseguite : "<< count << endl;
+    for (const auto& [id,transazione] : transazioni) {
+        fout << transazioni[id].getInfo() << std::endl; // Scrive l'info della transazione
+    }
 
-    //Oppure contando gli elementi nell vettore
+    fout << "Numero di transazioni eseguite : "<< transazioni.size() << endl;
+
+    //Sappiamo direttamente la size della map
 
     fout.close(); // Chiudi il file
 }
@@ -144,7 +157,11 @@ void ContoCorrente::LoadTransactionFromFile(const std::string& fileName) {
 
 
 void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::string& estrattoConto) {
-    ifstream fin(estrattoConto);  // Apro l'estratto conto
+    ifstream fin(estrattoConto);// Apro l'estratto conto
+    if(!fin.is_open()) {
+        throw runtime_error("Errore: impossibile aprire il file di testo");
+    }
+
     std::string input;
 
     while (getline(fin, input)) {
@@ -161,18 +178,16 @@ void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::str
         if (transazione.getImporto() == importo &&
             transazione.getIn() == tipoIn &&
             transazione.getData() == data) {
-            //Cerca corrispondenze
-            for (auto &trans : Transazioni) {
-                if (trans.getImporto() == importo &&
-                    trans.getIn() == tipoIn &&
-                    trans.getData() == data) {
-                    transazione.setConciliata(true);
-                    trans.setConciliata(true);
-                    WriteTransactionOnFile(ViewTransaction, Transazioni);
-                    return;
-                    }
+            //Troviamo la transazione con il metodo find
+            auto it = Transazioni.find(transazione.getID());
+            if (it != Transazioni.end()) {
+                transazione.setConciliata(true);
+                it->second.setConciliata(true);
+
+                WriteTransactionOnFile(ViewTransaction, Transazioni);
+                return;
             }
-            }
+        }
     }
     throw ObjectNotReady("La transazione ID: "+to_string(transazione.getID())+" non è ancora conciliata");
 
@@ -180,6 +195,9 @@ void ContoCorrente::ConciliaTransaction(Transazione &transazione, const std::str
 
 void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto) {
     ifstream fin(estrattoConto);
+    if(!fin.is_open()) {
+        throw runtime_error("Errore: impossibile aprire il file di testo");
+    }
     std::string input;
 
     while (getline(fin, input)) {
@@ -193,17 +211,17 @@ void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto) {
         bool tipoIn = (tipo == "Entrata");
 
         for (auto &transazione : Transazioni) {
-            if (transazione.getImporto() == importo &&
-                transazione.getIn() == tipoIn &&
-                transazione.getData() == data) {
-                transazione.setConciliata(true);
+            if (transazione.second.getImporto() == importo &&
+                transazione.second.getIn() == tipoIn &&
+                transazione.second.getData() == data) {
+                transazione.second.setConciliata(true);
                 }
         }
     }
     //Check di tutte le transazioni che siano conciliate -> Altrimenti notifica
-    for(auto &transazione : Transazioni){
+    for(auto& transazione : Transazioni){
         //verifica che siano conciliate
-        if(!transazione.getConciliata()){
+        if(!transazione.second.getConciliata()){
             throw ObjectNotReady("Ci sono alcune transazioni non ancora conciliate, verifica l'estratto conto");
         }
     }
@@ -211,7 +229,7 @@ void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto) {
 }
 
 
-std::vector<Transazione> ContoCorrente::getTransazioni() const {
+std::map<int, Transazione> ContoCorrente::getTransazioni() const {
     return Transazioni;
 }
 

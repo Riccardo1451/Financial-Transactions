@@ -56,7 +56,6 @@ TEST(TransazioneTest, TestDatiNonValidi) {
 }
 //Test su formato transazioni
 
-//TODO:Come gestire transazine duplicate ??
 TEST(TransazioneTestIncrementalID, TestID) {
     Transazione transizione1(100, true, "27-09-2023");
     Transazione transizione2(200, false, "28-09-2023");

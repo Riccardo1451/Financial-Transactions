@@ -3,9 +3,8 @@
 #define CONTOCORRENTE_H
 #include "Transazione.h"
 #include <string>
-#include <vector>
+#include <map>
 
-#include "FileManager.h"
 
 
 class ContoCorrente {
@@ -15,15 +14,14 @@ public:
 
     std::string getNome() const;
 
-    void addTransazione(Transazione & Transazione, std::string Percorso);
+    void addTransazione(Transazione &transazione, std::string Percorso);
 
     void modTransazione(int ID, int nuovoImporto, bool nuovoIn, std::string nuovaData);
 
     void deleteTransazione(int ID);
 
-    Transazione searchTransazione() const;
-    //TODO: cercare transazioni
-    void WriteTransactionOnFile(std::string fileName, std::vector<Transazione> &transazioni);
+    std::map <int,Transazione> searchTransazione(Transazione transazione) const;
+    void WriteTransactionOnFile(std::string fileName, std::map<int, Transazione> &transazioni);
 
     void LoadTransactionFromFile(const std::string& fileName);
 
@@ -31,7 +29,7 @@ public:
 
     void ConciliaAllTransactions(const std::string& estrattoConto);
 
-    std::vector<Transazione> getTransazioni() const;
+    std::map<int, Transazione> getTransazioni() const;
     int getBudget() const;
 
 private:
@@ -40,7 +38,8 @@ private:
 
     int IDcontatore;
 
-    std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
+    //std::vector<Transazione> Transazioni; //vettore di transazioni dell relativo conto
+    std::map <int, Transazione> Transazioni;
 };
 
 

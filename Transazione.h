@@ -11,6 +11,8 @@
 class Transazione {
 
 public:
+    Transazione() : Importo(0), In(false), data(""), Conciliata(false) {}  // costruttore di default
+
     Transazione(int Importo, bool in, std::string data, bool conciliata=false);
 
     int getImporto() const;
@@ -42,6 +44,6 @@ private:
 
     bool Conciliata;
 
-    int ID; //Attributo UNIVOCO che mi permette di identificare univocamente ogni transazione
+    int ID; //Attributo UNIVOCO che mi permette di identificare ogni transazione
 };
 #endif //TRANSAZIONE_H
