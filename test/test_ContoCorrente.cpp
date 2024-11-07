@@ -6,6 +6,8 @@
 #include <fstream>
 
 std::string ListaTransazioni = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/FileTesto/VisualizzaTransazioni.txt";
+const std::string PercorsoTestLettura = "UploadTest.txt";
+const std::string PercorsoTestScrittura = "ListaTest.txt";
 
 TEST(ContoCorrenteTest, TestValoriIniziali) {
     ContoCorrente c1("Mario Rossi");
@@ -28,21 +30,32 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     //Test sulla modifica di una Transazione dal CC
     int IDTest = t1.getID();
     c1.modTransazione(IDTest,400,false,"16-05-2000");
+
     //Verifico se la transazione ne CC è stata modificata correttamente
-    EXPECT_EQ(transazioni[it->second.getID()].getImporto(),400);
-    EXPECT_FALSE(it->second.getIn());
-    EXPECT_EQ(it->second.getData(), "16-05-2000");
+    transazioni = c1.getTransazioni();
+    auto modifiedTransactionIt = transazioni.find(IDTest);
+
+    EXPECT_NE(modifiedTransactionIt, transazioni.end());
+
+    EXPECT_EQ(modifiedTransactionIt->second.getImporto(),400);
+    EXPECT_FALSE(modifiedTransactionIt->second.getIn());
+    EXPECT_EQ(modifiedTransactionIt->second.getData(), "16-05-2000");
 
     c1.addTransazione(t2, ListaTransazioni);
 
     //Controllo in numero di Transazioni
-    ASSERT_EQ(c1.getTransazioni().size(),2);
+    ASSERT_EQ(c1.getTransazioni().size(), 2);
 
     //Test sulla cancellazione di una Transazione dal CC
     c1.deleteTransazione(IDTest);
     //Verifico il numero di Transazioni e che sia rimasta solo la 2
     ASSERT_EQ(c1.getTransazioni().size(),1);
-    EXPECT_EQ(c1.getTransazioni().end()->second.getID(),t2.getID());
+
+    auto transazioniAggiornate = c1.getTransazioni();
+    auto remainingTransactionIt = transazioniAggiornate.find(t2.getID());
+
+    ASSERT_NE(remainingTransactionIt, transazioniAggiornate.end());
+    EXPECT_EQ(remainingTransactionIt->second.getID(), t2.getID());
 }
 
 TEST(ContoCorrenteTest, TransazioniInesistenti) {
@@ -55,63 +68,26 @@ TEST(ContoCorrenteTest, TransazioniInesistenti) {
     EXPECT_THROW(c1.modTransazione(999, 500, false, "15-01-2003"), ObjectNotFound);
 
     // Verifica che la transazione originale non sia stata modificata
-    EXPECT_EQ(c1.getTransazioni().end()->second.getImporto(), 200);
-    EXPECT_TRUE(c1.getTransazioni().end()->second.getIn());
-    EXPECT_EQ(c1.getTransazioni().end()->second.getData(), "12-01-2003");
+    auto transazioni = c1.getTransazioni();
+    auto it = transazioni.find(t1.getID());
+
+    ASSERT_NE(it, transazioni.end()); // Assicura che t1 esista ancora
+    EXPECT_EQ(it->second.getImporto(), 200);
+    EXPECT_TRUE(it->second.getIn());
+    EXPECT_EQ(it->second.getData(), "12-01-2003");
 
     // Tenta di cancellare una transazione con ID inesistente
     EXPECT_THROW(c1.deleteTransazione(999),ObjectNotFound);
 
     // Verifica che la transazione originale non sia stata cancellata
-    ASSERT_EQ(c1.getTransazioni().size(), 1);
-    EXPECT_EQ(c1.getTransazioni().end()->second.getID(), t1.getID());
+    ASSERT_EQ(c1.getTransazioni().size(), 1); // Solo t1 dovrebbe rimanere
+
+    it = transazioni.find(t1.getID());
+    ASSERT_NE(it, transazioni.end()); // Assicura che t1 esista ancora
+    EXPECT_EQ(it->second.getID(), t1.getID());
 }
-TEST(ContoCorrenteTest, TestGestioneFile) {
-    std::string PercorsoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/ListaTest.txt";
-    ContoCorrente c1("Mario Rossi");
-    Transazione t1 (200,true,"15-07-2004");
 
-    //Test scrittura delle Transazioni su file
-    c1.addTransazione(t1,PercorsoTest);
-    //voglio verificare che venga scritta sul file indicato
-    std::ifstream fin (PercorsoTest);
-    std::string input;
 
-    if (!fin.is_open()) {
-        throw std::runtime_error("Errore: impossibile aprire il file ti testo");
-    }
-    else (std::getline(fin, input));
-    fin.close();
-
-    EXPECT_EQ("ID: "+std::to_string(t1.getID())+ " "+std::to_string(t1.getImporto()) +" Entrata"+" "+t1.getData()+" Non Conciliata",input);
-    c1.deleteTransazione(t1.getID());
-
-    //Test upload di Transazione da file
-    std::string UploadTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadTest.txt";
-
-    std::ofstream fout(UploadTest);
-    //Crea le Transazioni
-    fout << "ID: 1 200 Entrata 01-09-2023 Conciliata"<<std::endl;
-    fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
-    fout.close();
-
-    c1.LoadTransactionFromFile(UploadTest);
-
-    EXPECT_EQ(c1.getTransazioni().size(),2);
-    //Verifica che le Transazioni siano presenti
-    EXPECT_EQ(c1.getTransazioni().end()->second.getImporto(), 300);
-    EXPECT_FALSE(c1.getTransazioni().end()->second.getIn());
-    EXPECT_EQ(c1.getTransazioni().end()->second.getData(), "02-09-2023");
-    EXPECT_FALSE(c1.getTransazioni().end()->second.getConciliata());
-    auto it = c1.getTransazioni();
-    auto lastTransactionIt = std::prev(it.end(), 2);
-
-    // Test con Google Test
-    EXPECT_EQ(lastTransactionIt->second.getImporto(), 200);
-    EXPECT_TRUE(lastTransactionIt->second.getIn());
-    EXPECT_EQ(lastTransactionIt->second.getData(), "01-09-2023");
-    EXPECT_TRUE(lastTransactionIt->second.getConciliata());
-}
 TEST(ContoCorrenteTest, TestConciliazione) {
     std::string UploadEstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/UploadEstrattoTest.txt";
     std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
@@ -132,7 +108,7 @@ TEST(ContoCorrenteTest, TestConciliazione) {
     c1.LoadTransactionFromFile(UploadEstrattoTest);
 
     //Verifico che la Transazione sia conciliata
-    Transazione temp = c1.getTransazioni()[0];
+    Transazione temp = c1.getTransazioni().begin()->second;
 
     c1.ConciliaTransaction(temp,EstrattoTest);
 
@@ -191,3 +167,71 @@ TEST(ContoCorrenteTest, TestRefusoFormattazione) {
     //Tentativo di upload
     EXPECT_THROW(c1.LoadTransactionFromFile(UploadEstrattoTest),std::invalid_argument);
 }
+// Test per verificare la scrittura su file
+TEST(ContoCorrenteTest, TestScritturaSuFile) {
+    ContoCorrente c1("Mario Rossi");
+    Transazione t1(200, true, "15-07-2004");
+
+    // Esegue la scrittura della transazione sul file
+    c1.addTransazione(t1, PercorsoTestScrittura);
+
+    // Apre il file e legge la riga scritta
+    std::ifstream fin(PercorsoTestScrittura);
+
+
+    std::string input;
+    std::getline(fin, input);
+    fin.close();
+
+    // Confronta la riga letta con il formato atteso
+    std::string expectedOutput = "ID: " + std::to_string(t1.getID()) + " 200 Entrata 15-07-2004 Non Conciliata";
+    EXPECT_EQ(expectedOutput, input);
+}
+
+// Test per verificare il caricamento delle transazioni da un file
+TEST(ContoCorrenteTest, TestCaricamentoDaFile) {
+    // Prepara il file di input con transazioni di esempio
+    std::ofstream fout(PercorsoTestLettura);
+    fout << "ID: 1 200 Entrata 01-09-2023 Conciliata\n";
+    fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata\n";
+    fout.close();
+
+    ContoCorrente c1("Mario Rossi");
+
+    // Carica le transazioni dal file
+    c1.LoadTransactionFromFile(PercorsoTestLettura);
+    auto transazioni = c1.getTransazioni();
+
+    // Verifica che siano state caricate 2 transazioni
+    ASSERT_EQ(c1.getTransazioni().size(), 2);
+
+    // Verifica la consistenza della prima transazione caricata
+    auto it = transazioni.find(1);
+    ASSERT_NE(it, transazioni.end());
+    EXPECT_EQ(it->second.getImporto(), 200);
+    EXPECT_TRUE(it->second.getIn());
+    EXPECT_EQ(it->second.getData(), "01-09-2023");
+    EXPECT_TRUE(it->second.getConciliata());
+
+    // Verifica la consistenza della seconda transazione caricata
+    it = transazioni.find(2);
+    ASSERT_NE(it, transazioni.end());
+    EXPECT_EQ(it->second.getImporto(), 300);
+    EXPECT_FALSE(it->second.getIn());
+    EXPECT_EQ(it->second.getData(), "02-09-2023");
+    EXPECT_FALSE(it->second.getConciliata());
+}
+
+// Test per verificare la gestione di file con formati non validi
+TEST(ContoCorrenteTest, TestCaricamentoDaFileFormatoNonValido) {
+    // Prepara un file con un formato non valido
+    std::ofstream fout(PercorsoTestLettura);
+    fout << "ID: A B Entrata C Conciliata\n";  // Righe con formato errato
+    fout.close();
+
+    ContoCorrente c1("Mario Rossi");
+
+    // Si aspetta che venga lanciata un'eccezione durante il caricamento
+    EXPECT_THROW(c1.LoadTransactionFromFile(PercorsoTestLettura), std::invalid_argument);
+}
+

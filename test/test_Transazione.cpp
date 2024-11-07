@@ -57,15 +57,23 @@ TEST(TransazioneTest, TestDatiNonValidi) {
 //Test su formato transazioni
 
 TEST(TransazioneTestIncrementalID, TestID) {
-    Transazione transizione1(100, true, "27-09-2023");
-    Transazione transizione2(200, false, "28-09-2023");
-    ContoCorrente c1 ("Mario Rossi");
-    c1.addTransazione(transizione1,"");
-    c1.addTransazione(transizione2,"");
+    Transazione transazione1(100, true, "27-09-2023");
+    Transazione transazione2(200, false, "28-09-2023");
+    ContoCorrente c1("Mario Rossi");
 
-    //Test su due transaizone consecutive
-    //Verifica ID consecutivi
-    EXPECT_EQ(transizione2.getID(), transizione1.getID() + 1);
+    c1.addTransazione(transazione1, "");
+    c1.addTransazione(transazione2, "");
+
+    // Recupera le transazioni dal conto corrente per controllare gli ID assegnati
+    auto transazioni = c1.getTransazioni();
+    auto it1 = transazioni.find(transazione1.getID());
+    auto it2 = transazioni.find(transazione2.getID());
+
+    ASSERT_NE(it1, transazioni.end()); // Verifica che la prima transazione esista
+    ASSERT_NE(it2, transazioni.end()); // Verifica che la seconda transazione esista
+
+    // Verifica che gli ID siano consecutivi
+    EXPECT_EQ(it2->second.getID(), it1->second.getID() + 1);
 }
 
 

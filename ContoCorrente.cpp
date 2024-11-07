@@ -100,9 +100,9 @@ std::map<int,Transazione> ContoCorrente::searchTransazione(Transazione transazio
 void ContoCorrente::WriteTransactionOnFile(std::string fileName, std::map<int, Transazione> &transazioni) {
     ofstream fout(fileName);
 
-    if(!fout.is_open()) {
+    /*if(!fout.is_open()) {
         throw runtime_error("Errore: impossibile aprire il file di testo");
-    }
+    }*/
 
     for (const auto& [id,transazione] : transazioni) {
         fout << transazioni[id].getInfo() << std::endl; // Scrive l'info della transazione
@@ -153,6 +153,7 @@ void ContoCorrente::LoadTransactionFromFile(const std::string& fileName) {
 
         WriteTransactionOnFile(ViewTransaction, Transazioni);
     }
+    fin.close();
 }
 
 
@@ -229,7 +230,7 @@ void ContoCorrente::ConciliaAllTransactions(const std::string& estrattoConto) {
 }
 
 
-std::map<int, Transazione> ContoCorrente::getTransazioni() const {
+std::map<int, Transazione> &ContoCorrente::getTransazioni(){
     return Transazioni;
 }
 

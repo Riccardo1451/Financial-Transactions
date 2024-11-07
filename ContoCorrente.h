@@ -29,7 +29,7 @@ public:
 
     void ConciliaAllTransactions(const std::string& estrattoConto);
 
-    std::map<int, Transazione> getTransazioni() const;
+    std::map<int, Transazione>& getTransazioni();
     int getBudget() const;
 
 private:
