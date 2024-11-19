@@ -17,11 +17,6 @@ ContoCorrente::ContoCorrente(std::string Nome, int Budget) : Intestatario(Nome),
 std::string ContoCorrente::getNome() const {
     return Intestatario;
 }
-
-
-
-
-
 void ContoCorrente::addTransazione(Transazione& transazione, std::string Percorso) {
     //Gestione budget
     if (transazione.getIn())
@@ -128,11 +123,7 @@ void ContoCorrente::LoadTransactionFromFile(const std::string& fileName) {
         if (!(iss >> id_label >> id >> importo >> in >> data)) {
             throw invalid_argument("Errore: formato della transazione non valido");
         }
-
-
         getline(iss, conciliata);
-
-
         bool opt;
         if (in == "Entrata") {
             opt = true;
@@ -143,13 +134,10 @@ void ContoCorrente::LoadTransactionFromFile(const std::string& fileName) {
             continue;
         }
 
-
         bool conc = (conciliata == " Conciliata");
-
 
         Transazione temp = Transazione(importo, opt, data, conc);
         addTransazione(temp, "");
-
 
         WriteTransactionOnFile(ViewTransaction, Transazioni);
     }

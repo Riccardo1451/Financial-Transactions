@@ -26,8 +26,6 @@ TEST(TransazioneTest, TestSetter) {
     Transazione transazione(100, true, "27-09-2023");
 
     //Test con valore negativo
-
-
     EXPECT_THROW(transazione.setImporto(-500),std::invalid_argument);
 
     //Test modifica importo
@@ -77,7 +75,4 @@ TEST(TransazioneTestIncrementalID, TestID) {
 }
 
 
-int main(int argc, char **argv) {
-   ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
+

@@ -25,21 +25,21 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
 
     auto it = transazioni.find(t1.getID());
     //Test su aggiunta Transazione al CC
-    EXPECT_NE(it,transazioni.end());
+    EXPECT_NE(it,transazioni.end()); //not equal
 
     //Test sulla modifica di una Transazione dal CC
     int IDTest = t1.getID();
     c1.modTransazione(IDTest,400,false,"16-05-2000");
 
-    //Verifico se la transazione ne CC è stata modificata correttamente
+    //Verifico se la transazione nel CC è stata modificata correttamente
     transazioni = c1.getTransazioni();
-    auto modifiedTransactionIt = transazioni.find(IDTest);
+    auto TransazioneModificataIt = transazioni.find(IDTest);
 
-    EXPECT_NE(modifiedTransactionIt, transazioni.end());
+    EXPECT_NE(TransazioneModificataIt, transazioni.end());
 
-    EXPECT_EQ(modifiedTransactionIt->second.getImporto(),400);
-    EXPECT_FALSE(modifiedTransactionIt->second.getIn());
-    EXPECT_EQ(modifiedTransactionIt->second.getData(), "16-05-2000");
+    EXPECT_EQ(TransazioneModificataIt->second.getImporto(),400);
+    EXPECT_FALSE(TransazioneModificataIt->second.getIn());
+    EXPECT_EQ(TransazioneModificataIt->second.getData(), "16-05-2000");
 
     c1.addTransazione(t2, ListaTransazioni);
 
@@ -51,11 +51,11 @@ TEST(ContoCorrenteTest, TestOPTransazioni){
     //Verifico il numero di Transazioni e che sia rimasta solo la 2
     ASSERT_EQ(c1.getTransazioni().size(),1);
 
-    auto transazioniAggiornate = c1.getTransazioni();
-    auto remainingTransactionIt = transazioniAggiornate.find(t2.getID());
+    auto transazioniAggiornate = c1.getTransazioni(); //Devo recuperare nuovamente le transazioni
+    auto TransazioneRimanenteIt = transazioniAggiornate.find(t2.getID());
 
-    ASSERT_NE(remainingTransactionIt, transazioniAggiornate.end());
-    EXPECT_EQ(remainingTransactionIt->second.getID(), t2.getID());
+    ASSERT_NE(TransazioneRimanenteIt, transazioniAggiornate.end());
+    EXPECT_EQ(TransazioneRimanenteIt->second.getID(), t2.getID());
 }
 
 TEST(ContoCorrenteTest, TransazioniInesistenti) {
@@ -93,6 +93,7 @@ TEST(ContoCorrenteTest, TestConciliazione) {
     std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
     ContoCorrente c1 ("Mario Rossi");
 
+    //Riempio i due file di testo e verifico upload e estratto conto
     std::ofstream fout (UploadEstrattoTest);
     fout << "ID: 1 200 Entrata 01-09-2023 Non Conciliata"<<std::endl;
     fout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
@@ -105,7 +106,7 @@ TEST(ContoCorrenteTest, TestConciliazione) {
     testout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
     testout.close();
 
-    c1.LoadTransactionFromFile(UploadEstrattoTest);
+    c1.LoadTransactionFromFile(UploadEstrattoTest); //Carico le transazioni dal file sul CC
 
     //Verifico che la Transazione sia conciliata
     Transazione temp = c1.getTransazioni().begin()->second;
@@ -126,13 +127,14 @@ TEST(ContoCorrenteTest, TestNonConciliazione) {
     std::string EstrattoTest = "/Users/riccardofantechi/Desktop/Universita/Primo anno/Laboratorio di Programmazione/test/EstrattoTest.txt";
     ContoCorrente c1("Mario Rossi");
 
+    //Riempio il file di testo e creo una transazione non presente
     std::ofstream testout (EstrattoTest);
     testout << "ID: 1 200 Entrata 01-09-2023 Non Conciliata"<<std::endl;
     testout << "ID: 2 300 Uscita 02-09-2023 Non Conciliata"<<std::endl;
     testout << "ID: 3 700 Uscita 27-11-2007 Non Conciliata"<<std::endl;
     testout.close();
 
-    Transazione temp (200, false, "03-12-2000"); //transazione non nell'estratto conto
+    Transazione temp (200, false, "03-12-2000"); //transazione non presente nell'estratto conto
 
     c1.addTransazione(temp,"");
 
@@ -153,6 +155,7 @@ TEST(ContoCorrenteTest, TestNonConciliazione) {
     c2.addTransazione(tn,""); //Transazione non presente
 
     EXPECT_THROW(c2.ConciliaAllTransactions(EstrattoTest),ObjectNotReady);
+    //Il metodo concilia all vuole verificare che tutte le transazioni siano presenti
 }
 TEST(ContoCorrenteTest, TestRefusoFormattazione) {
     //Verifica il comportamento quando dal file di upload il formato delle transazione è errato
@@ -231,7 +234,7 @@ TEST(ContoCorrenteTest, TestCaricamentoDaFileFormatoNonValido) {
 
     ContoCorrente c1("Mario Rossi");
 
-    // Si aspetta che venga lanciata un'eccezione durante il caricamento
+    //Eccezione durante il caricamento
     EXPECT_THROW(c1.LoadTransactionFromFile(PercorsoTestLettura), std::invalid_argument);
 }
 
